@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Engine Tests</title>
+    <style>
+        body { font-family: monospace; padding: 2em; background: #1e1e1e; color: #d4d4d4; }
+        h1 { color: #9cdcfe; }
+        .suite { margin-bottom: 2em; }
+        h2 { color: #9cdcfe; margin-bottom: 0.5em; }
+        .case { margin: 0.4em 0; padding: 0.4em 1em; border-left: 3px solid #555; }
+        .pass { border-color: #4ec94e; }
+        .fail { border-color: #f44747; }
+        .label { color: #888; font-size: 0.85em; }
+        .detail { margin-top: 0.2em; }
+        .ok   { color: #4ec94e; }
+        .bad  { color: #f44747; }
+        .info { color: #dcdcaa; }
+        .summary { margin-top: 2em; font-size: 1.1em; font-weight: bold; }
+        .all-pass { color: #4ec94e; }
+        .has-fail { color: #f44747; }
+    </style>
+</head>
+<body>
+<h1>engine.js — test suite</h1>
+<div id="output"></div>
+
+<script type="module">
+import { getData }          from './js/data.js';
+import { generateExercise } from './js/engine.js';
+import { check }            from './js/checker.js';
+
+const out = document.getElementById('output');
+
+window.addEventListener('unhandledrejection', e => {
+    out.innerHTML += `<div style="color:#f44747;padding:1em">Unhandled error: ${e.reason}</div>`;
+});
+
+let passed   = 0;
+let failed   = 0;
+
+try {
+
+function suite(label) {
+    const el = document.createElement('div');
+    el.className = 'suite';
+    el.innerHTML = `<h2>${label}</h2>`;
+    out.appendChild(el);
+    return el;
+}
+
+function testCase(parent, label, exercise, checks) {
+    const errors = [];
+
+    for (const [desc, ok] of checks) {
+        if (!ok) errors.push(desc);
+    }
+
+    const pass = errors.length === 0;
+    if (pass) passed++; else failed++;
+
+    const el = document.createElement('div');
+    el.className = `case ${pass ? 'pass' : 'fail'}`;
+
+    let html = `<div class="label">${pass ? '✓' : '✗'} ${label}</div>`;
+    html += `<div class="detail">`;
+    html += `<span class="info">prompt:</span> "${exercise.prompt}"  `;
+    if (exercise.hints.length) html += `<span class="info">hint:</span> ${exercise.hints.map(h=>h.text).join(' ')}  `;
+    html += `<span class="info">answer:</span> <strong>${exercise.answer}</strong>`;
+    html += `</div>`;
+
+    if (!pass) {
+        errors.forEach(e => { html += `<div class="bad">  ✗ ${e}</div>`; });
+    }
+
+    // Show token breakdown
+    html += `<div class="detail" style="color:#777;font-size:0.85em;">tokens: `;
+    exercise.answerTokens.forEach(t => {
+        html += `[${t.token}:${t.role}] `;
+    });
+    html += `</div>`;
+
+    el.innerHTML = html;
+    parent.appendChild(el);
+}
+
+const data = await getData();
+const n    = data.nounIndex;
+const a    = data.adjIndex;
+
+// ── Noun phrase: definite ─────────────────────────────────────────────────────
+
+{
+    const s = suite('Noun + adjective: definite');
+
+    let ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'definite', noun: n['gatto'], adjective: a['rosso'] });
+    testCase(s, 'Standard m singular: Il gatto rosso', ex, [
+        ['answer == "Il gatto rosso"', ex.answer === 'Il gatto rosso'],
+        ['prompt == "The red cat"',    ex.prompt === 'The red cat'],
+        ['3 tokens',                   ex.answerTokens.length === 3],
+        ['article role',               ex.answerTokens[0].role === 'article'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'plural', noun: n['gatto'], adjective: a['rosso'] });
+    testCase(s, 'Standard m plural: I gatti rossi', ex, [
+        ['answer == "I gatti rossi"',  ex.answer === 'I gatti rossi'],
+        ['prompt == "The red cats"',   ex.prompt === 'The red cats'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'definite', noun: n['borsa'], adjective: a['rosso'] });
+    testCase(s, 'Standard f singular: La borsa rossa', ex, [
+        ['answer == "La borsa rossa"', ex.answer === 'La borsa rossa'],
+        ['prompt == "The red bag"',    ex.prompt === 'The red bag'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'plural', noun: n['zaino'], adjective: a['blu'] });
+    testCase(s, 'Lo-class m plural + invariable: Gli zaini blu', ex, [
+        ['answer == "Gli zaini blu"',  ex.answer === 'Gli zaini blu'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'definite', noun: n['amico'], adjective: a['felice'] });
+    testCase(s, 'Vowel-class m singular (elided): L\'amico felice', ex, [
+        ["answer == \"L'amico felice\"", ex.answer === "L'amico felice"],
+        ['1 token (article+noun fused)', ex.answerTokens[0].role === 'article_noun'],
+        ['2 tokens total',               ex.answerTokens.length === 2],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'plural', noun: n['amico'], adjective: a['felice'] });
+    testCase(s, 'Vowel-class m plural (gli): Gli amici felici', ex, [
+        ['answer == "Gli amici felici"', ex.answer === 'Gli amici felici'],
+        ['article not elided',           ex.answerTokens[0].role === 'article'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'definite', noun: n['estate'], adjective: a['grande'] });
+    testCase(s, 'Vowel-class f singular (elided): L\'estate grande', ex, [
+        ["answer == \"L'estate grande\"", ex.answer === "L'estate grande"],
+    ]);
+}
+
+// ── Noun phrase: indefinite ───────────────────────────────────────────────────
+
+{
+    const s = suite('Noun + adjective: indefinite');
+
+    let ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'indefinite', noun: n['libro'], adjective: a['piccolo'] });
+    testCase(s, 'Standard m: Un libro piccolo', ex, [
+        ['answer == "Un libro piccolo"', ex.answer === 'Un libro piccolo'],
+        ['prompt starts "A"',           ex.prompt.startsWith('A ')],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'indefinite', noun: n['zaino'], adjective: a['rosso'] });
+    testCase(s, 'Lo-class m: Uno zaino rosso', ex, [
+        ['answer == "Uno zaino rosso"', ex.answer === 'Uno zaino rosso'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'indefinite', noun: n['amica'], adjective: a['felice'] });
+    testCase(s, 'Vowel-class f (elided): Un\'amica felice', ex, [
+        ["answer == \"Un'amica felice\"", ex.answer === "Un'amica felice"],
+        ['1 token (article+noun fused)',  ex.answerTokens[0].role === 'article_noun'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'indefinite', noun: n['casa'], adjective: a['grande'] });
+    testCase(s, 'Standard f: Una casa grande', ex, [
+        ['answer == "Una casa grande"', ex.answer === 'Una casa grande'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'indefinite', noun: n['amico'], adjective: a['grande'] });
+    testCase(s, 'Vowel-class m: Un amico grande (no elision)', ex, [
+        ['answer == "Un amico grande"', ex.answer === 'Un amico grande'],
+    ]);
+}
+
+// ── Predicative (noun + è/sono + adj) ────────────────────────────────────────
+
+{
+    const s = suite('Predicative: noun is/are adjective');
+
+    let ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['gatto'], adjective: a['malato'] });
+    testCase(s, 'Singular: Il gatto è malato', ex, [
+        ['answer == "Il gatto è malato"', ex.answer === 'Il gatto è malato'],
+        ['prompt == "The cat is sick"',   ex.prompt === 'The cat is sick'],
+        ['4 tokens',                      ex.answerTokens.length === 4],
+        ['verb token is è',               ex.answerTokens[2].token === 'è'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounPred', number: 'plural', noun: n['gatto'], adjective: a['malato'] });
+    testCase(s, 'Plural: I gatti sono malati', ex, [
+        ['answer == "I gatti sono malati"', ex.answer === 'I gatti sono malati'],
+        ['verb is sono',                    ex.answerTokens[2].token === 'sono'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['ragazza'], adjective: a['triste'] });
+    testCase(s, 'F singular 2-form: La ragazza è triste', ex, [
+        ['answer == "La ragazza è triste"', ex.answer === 'La ragazza è triste'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['amico'], adjective: a['felice'] });
+    testCase(s, 'Vowel-class m elided: L\'amico è felice', ex, [
+        ["answer == \"L'amico è felice\"", ex.answer === "L'amico è felice"],
+        ['3 tokens (article_noun, è, adj)', ex.answerTokens.length === 3],
+    ]);
+}
+
+// ── Possessive predicative ────────────────────────────────────────────────────
+
+{
+    const s = suite('Possessive: My [noun] is [adj]');
+
+    let ex = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['cane'], adjective: a['malato'] });
+    testCase(s, 'Standard m singular: Il mio cane è malato', ex, [
+        ['answer == "Il mio cane è malato"', ex.answer === 'Il mio cane è malato'],
+        ['prompt == "My dog is sick"',       ex.prompt === 'My dog is sick'],
+        ['no hint (cane has no masculine)',  ex.hints.length === 0],
+        ['5 tokens',                         ex.answerTokens.length === 5],
+    ]);
+
+    ex = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['cagna'], adjective: a['stanco'] });
+    testCase(s, 'Feminine pair with hint: La mia cagna è stanca', ex, [
+        ['answer == "La mia cagna è stanca"', ex.answer === 'La mia cagna è stanca'],
+        ['hint is (female)',                   ex.hints.length === 1 && ex.hints[0].text === '(female)'],
+        ['prompt == "My dog is tired"',        ex.prompt === 'My dog is tired'],
+        ['article is La',                      ex.answerTokens[0].token === 'La'],
+        ['possessive is mia',                  ex.answerTokens[1].token === 'mia'],
+        ['adjective is stanca',                ex.answerTokens[4].token === 'stanca'],
+    ]);
+
+    ex = generateExercise(data, { template: 'possNounPred', number: 'plural', noun: n['cane'], adjective: a['malato'] });
+    testCase(s, 'Standard m plural: I miei cani sono malati', ex, [
+        ['answer == "I miei cani sono malati"', ex.answer === 'I miei cani sono malati'],
+        ['verb is sono',                        ex.answerTokens[3].token === 'sono'],
+        ['possessive is miei',                  ex.answerTokens[1].token === 'miei'],
+    ]);
+
+    ex = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['zaino'], adjective: a['grande'] });
+    testCase(s, 'Lo-class m: possessive uses il (not lo)', ex, [
+        ['answer == "Il mio zaino è grande"', ex.answer === 'Il mio zaino è grande'],
+        ['article is Il (not Lo)',            ex.answerTokens[0].token === 'Il'],
+    ]);
+
+    ex = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['amico'], adjective: a['felice'] });
+    testCase(s, 'Vowel-class m: possessive uses il (not l\')', ex, [
+        ['answer == "Il mio amico è felice"', ex.answer === 'Il mio amico è felice'],
+        ['article is Il (not L\')',           ex.answerTokens[0].token === 'Il'],
+    ]);
+}
+
+// ── Irregular noun ────────────────────────────────────────────────────────────
+
+{
+    const s = suite('Irregular nouns');
+
+    let ex = generateExercise(data, { template: 'nounAdj', number: 'plural', noun: n['uomo'], adjective: a['grande'] });
+    testCase(s, 'Irregular plural: Gli uomini grandi', ex, [
+        ['answer == "Gli uomini grandi"', ex.answer === 'Gli uomini grandi'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['mano'], adjective: a['piccolo'] });
+    testCase(s, 'Feminine -o noun: La mano è piccola', ex, [
+        ['answer == "La mano è piccola"', ex.answer === 'La mano è piccola'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['problema'], adjective: a['grande'] });
+    testCase(s, 'Masculine -a noun: Il problema è grande', ex, [
+        ['answer == "Il problema è grande"', ex.answer === 'Il problema è grande'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'plural', noun: n['città'], adjective: a['grande'] });
+    testCase(s, 'Invariable noun plural: Le città grandi', ex, [
+        ['answer == "Le città grandi"', ex.answer === 'Le città grandi'],
+    ]);
+}
+
+// ── User-requested cases ──────────────────────────────────────────────────────
+
+{
+    const s = suite('User cases');
+
+    let ex = generateExercise(data, { template: 'nounPred', number: 'plural', noun: n['ragazza'], adjective: a['triste'] });
+    testCase(s, 'The girls are sad: Le ragazze sono tristi', ex, [
+        ['answer == "Le ragazze sono tristi"', ex.answer === 'Le ragazze sono tristi'],
+        ['prompt == "The girls are sad"',      ex.prompt === 'The girls are sad'],
+        ['article is Le',                      ex.answerTokens[0].token === 'Le'],
+        ['noun is ragazze',                    ex.answerTokens[1].token === 'ragazze'],
+        ['verb is sono',                       ex.answerTokens[2].token === 'sono'],
+        ['adj is tristi (2-form fp)',          ex.answerTokens[3].token === 'tristi'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounPred', number: 'plural', noun: n['ragazzo'], adjective: a['rumoroso'] });
+    testCase(s, 'The boys are loud: I ragazzi sono rumorosi', ex, [
+        ['answer == "I ragazzi sono rumorosi"', ex.answer === 'I ragazzi sono rumorosi'],
+        ['prompt == "The boys are loud"',       ex.prompt === 'The boys are loud'],
+        ['article is I',                        ex.answerTokens[0].token === 'I'],
+        ['noun is ragazzi',                     ex.answerTokens[1].token === 'ragazzi'],
+        ['verb is sono',                        ex.answerTokens[2].token === 'sono'],
+        ['adj is rumorosi (4-form mp)',         ex.answerTokens[3].token === 'rumorosi'],
+    ]);
+}
+
+// ── Epicene nouns ─────────────────────────────────────────────────────────────
+
+{
+    const s = suite('Epicene nouns');
+
+    let ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['volpe'], adjective: a['furbo'] });
+    testCase(s, 'Epicene: La volpe è furba (with male hint)', ex, [
+        ['answer == "La volpe è furba"',      ex.answer === 'La volpe è furba'],
+        ['hint is (male)',                    ex.hints.length === 1 && ex.hints[0].text === '(male)'],
+        ['article is La (grammatically f)',   ex.answerTokens[0].token === 'La'],
+        ['adjective is furba (feminine)',     ex.answerTokens[3].token === 'furba'],
+    ]);
+}
+
+// ── Synonym acceptance (via checker) ─────────────────────────────────────────
+
+{
+    const s = suite('Synonym acceptance');
+    let ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['volpe'], adjective: a['furbo'] });
+
+    const perfect  = check('La volpe è furba',  ex);
+    const synonym  = check('La volpe è astuta', ex);
+    const wrong    = check('La volpe è rosso',  ex);
+
+    testCase(s, 'Primary form: user types "La volpe è furba"',  { ...ex },
+        [['correct', perfect.correct && !perfect.accentOnly]]);
+
+    testCase(s, 'Synonym form: user types "La volpe è astuta"', { ...ex },
+        [['synonym accepted as correct', synonym.correct]]);
+
+    testCase(s, 'Wrong adjective: user types "La volpe è rosso"', { ...ex },
+        [['wrong adjective rejected', !wrong.correct]]);
+}
+
+// ── Summary ───────────────────────────────────────────────────────────────────
+
+const sumEl = document.createElement('div');
+sumEl.className = `summary ${failed === 0 ? 'all-pass' : 'has-fail'}`;
+sumEl.textContent = `${passed + failed} tests: ${passed} passed, ${failed} failed`;
+out.appendChild(sumEl);
+
+} catch(e) {
+    out.innerHTML += `<div style="color:#f44747;padding:1em;border:1px solid #f44747">
+        <strong>Error:</strong> ${e.message}<br>
+        <pre>${e.stack}</pre>
+    </div>`;
+}
+</script>
+</body>
+</html>

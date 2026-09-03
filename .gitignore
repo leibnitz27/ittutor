@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+.claude/
+test_result_raw.txt

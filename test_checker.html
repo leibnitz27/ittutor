@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checker Tests</title>
+    <style>
+        body { font-family: monospace; padding: 2em; background: #1e1e1e; color: #d4d4d4; }
+        .suite { margin-bottom: 2em; }
+        h2 { color: #9cdcfe; margin-bottom: 0.5em; }
+        .case { margin: 0.5em 0; padding: 0.5em 1em; border-left: 3px solid #555; }
+        .pass { border-color: #4ec94e; }
+        .fail { border-color: #f44747; }
+        .label { color: #888; font-size: 0.85em; }
+        .input { color: #ce9178; }
+        .tokens { margin-top: 0.4em; padding-left: 1em; }
+        .tok-ok      { color: #4ec94e; }
+        .tok-accent  { color: #dcdcaa; }
+        .tok-wrong   { color: #f44747; }
+        .tok-struct  { color: #f44747; font-style: italic; }
+        .summary { margin-top: 2em; font-size: 1.1em; font-weight: bold; }
+        .summary.all-pass { color: #4ec94e; }
+        .summary.has-fail { color: #f44747; }
+    </style>
+</head>
+<body>
+<h1>checker.js — test suite</h1>
+<div id="output"></div>
+
+<script type="module">
+import { check } from './js/checker.js';
+
+// ── The exercise from our design session ─────────────────────────────────────
+// "My (female) dog is tired" → "La mia cagna è stanca"
+
+const cagnaExercise = {
+    answer: "La mia cagna è stanca",
+    answerTokens: [
+        { token: "La",     role: "article",    ruleId: "article_definite",    context: { gender: "f", number: "singular", noun: "cagna" } },
+        { token: "mia",    role: "possessive", ruleId: "possessive_article",  context: { gender: "f", number: "singular", noun: "cagna" } },
+        { token: "cagna",  role: "noun",       ruleId: null,                  context: { gender: "f", number: "singular", singular: "cagna" } },
+        { token: "è",      role: "verb",       ruleId: null,                  context: { verb: "essere", pronoun: "lui/lei" } },
+        { token: "stanca", role: "adjective",  ruleId: "adj_gender_agreement",context: { gender: "f", number: "singular", noun: "cagna", baseForm: "stanco" } }
+    ]
+};
+
+// ── "The red cats" → "I gatti rossi" ─────────────────────────────────────────
+
+const gattiExercise = {
+    answer: "I gatti rossi",
+    answerTokens: [
+        { token: "I",      role: "article",   ruleId: "article_definite",    context: { gender: "m", number: "plural", noun: "gatti" } },
+        { token: "gatti",  role: "noun",      ruleId: "noun_plural",         context: { gender: "m", number: "plural", singular: "gatto" } },
+        { token: "rossi",  role: "adjective", ruleId: "adj_number_agreement",context: { gender: "m", number: "plural", noun: "gatti", baseForm: "rosso" } }
+    ]
+};
+
+// ── "The blue rucksacks" → "Gli zaini blu" ───────────────────────────────────
+
+const zainiExercise = {
+    answer: "Gli zaini blu",
+    answerTokens: [
+        { token: "Gli",   role: "article",   ruleId: "article_definite", context: { gender: "m", number: "plural", noun: "zaini" } },
+        { token: "zaini", role: "noun",      ruleId: "noun_plural",      context: { gender: "m", number: "plural", singular: "zaino" } },
+        { token: "blu",   role: "adjective", ruleId: "adj_invariable",   context: { gender: "m", number: "plural", noun: "zaini", baseForm: "blu" } }
+    ]
+};
+
+// ── Test cases ────────────────────────────────────────────────────────────────
+
+const tests = [
+    {
+        suite: "La mia cagna è stanca",
+        cases: [
+            {
+                label: "Session input — article wrong, accent missing",
+                input: "Il mia cagna e stanca",
+                exercise: cagnaExercise,
+                expect: { correct: false, accentOnly: false },
+                expectTokens: [
+                    { correct: false, accentOnly: false },  // Il → La
+                    { correct: true,  accentOnly: false },  // mia ✓
+                    { correct: true,  accentOnly: false },  // cagna ✓
+                    { correct: true,  accentOnly: true  },  // e → è (accent)
+                    { correct: true,  accentOnly: false },  // stanca ✓
+                ]
+            },
+            {
+                label: "Perfect answer",
+                input: "La mia cagna è stanca",
+                exercise: cagnaExercise,
+                expect: { correct: true, accentOnly: false },
+            },
+            {
+                label: "Accent only — missing è",
+                input: "La mia cagna e stanca",
+                exercise: cagnaExercise,
+                expect: { correct: true, accentOnly: true },
+            },
+            {
+                label: "Wrong adjective gender — stanco instead of stanca",
+                input: "La mia cagna è stanco",
+                exercise: cagnaExercise,
+                expect: { correct: false, accentOnly: false },
+                expectTokens: [
+                    { correct: true,  accentOnly: false },
+                    { correct: true,  accentOnly: false },
+                    { correct: true,  accentOnly: false },
+                    { correct: true,  accentOnly: false },
+                    { correct: false, accentOnly: false },  // stanco → stanca
+                ]
+            },
+            {
+                label: "Wrong word count",
+                input: "La cagna è stanca",
+                exercise: cagnaExercise,
+                expect: { correct: false },
+                expectStructural: true
+            },
+        ]
+    },
+    {
+        suite: "I gatti rossi",
+        cases: [
+            {
+                label: "Perfect answer",
+                input: "I gatti rossi",
+                exercise: gattiExercise,
+                expect: { correct: true, accentOnly: false },
+            },
+            {
+                label: "Singular noun — forgot to pluralise",
+                input: "I gatto rossi",
+                exercise: gattiExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: true,  accentOnly: false },
+                    { correct: false, accentOnly: false },  // gatto → gatti
+                    { correct: true,  accentOnly: false },
+                ]
+            },
+            {
+                label: "Wrong article — il instead of i",
+                input: "Il gatti rossi",
+                exercise: gattiExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: false, accentOnly: false },  // Il → I
+                    { correct: true,  accentOnly: false },
+                    { correct: true,  accentOnly: false },
+                ]
+            },
+        ]
+    },
+    {
+        suite: "Gli zaini blu",
+        cases: [
+            {
+                label: "Session input — article right, noun not pluralised",
+                input: "Gli zaino blu",
+                exercise: zainiExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: true,  accentOnly: false },  // Gli ✓
+                    { correct: false, accentOnly: false },  // zaino → zaini
+                    { correct: true,  accentOnly: false },  // blu ✓ (invariable)
+                ]
+            },
+            {
+                label: "Perfect answer",
+                input: "Gli zaini blu",
+                exercise: zainiExercise,
+                expect: { correct: true, accentOnly: false },
+            },
+        ]
+    },
+];
+
+// ── Runner ────────────────────────────────────────────────────────────────────
+
+let passed = 0;
+let failed = 0;
+const out = document.getElementById('output');
+
+function assert(condition, label) {
+    if (!condition) throw new Error(label);
+}
+
+for (const suite of tests) {
+    const suiteEl = document.createElement('div');
+    suiteEl.className = 'suite';
+    suiteEl.innerHTML = `<h2>${suite.suite}</h2>`;
+
+    for (const tc of suite.cases) {
+        const result = check(tc.input, tc.exercise);
+        let ok = true;
+        const notes = [];
+
+        try {
+            if ('correct'    in tc.expect) assert(result.correct    === tc.expect.correct,    `correct: expected ${tc.expect.correct}, got ${result.correct}`);
+            if ('accentOnly' in tc.expect) assert(result.accentOnly === tc.expect.accentOnly, `accentOnly: expected ${tc.expect.accentOnly}, got ${result.accentOnly}`);
+            if (tc.expectStructural) assert(result.structuralError !== null, 'expected structuralError');
+            if (tc.expectTokens) {
+                assert(result.tokens.length === tc.expectTokens.length, `token count: expected ${tc.expectTokens.length}, got ${result.tokens.length}`);
+                tc.expectTokens.forEach((et, i) => {
+                    const t = result.tokens[i];
+                    if ('correct'    in et) assert(t.correct    === et.correct,    `token[${i}].correct: expected ${et.correct}, got ${t.correct}`);
+                    if ('accentOnly' in et) assert(t.accentOnly === et.accentOnly, `token[${i}].accentOnly: expected ${et.accentOnly}, got ${t.accentOnly}`);
+                });
+            }
+        } catch (e) {
+            ok = false;
+            notes.push(e.message);
+        }
+
+        const caseEl = document.createElement('div');
+        caseEl.className = `case ${ok ? 'pass' : 'fail'}`;
+
+        let html = `<div class="label">${ok ? '✓' : '✗'} ${tc.label}</div>`;
+        html += `<div class="input">Input: "${tc.input}"</div>`;
+
+        if (!ok) {
+            notes.forEach(n => { html += `<div class="tok-wrong">  ✗ ${n}</div>`; });
+        }
+
+        if (result.structuralError) {
+            html += `<div class="tokens"><span class="tok-struct">${result.structuralError.message}</span></div>`;
+        } else if (result.tokens.length > 0) {
+            html += '<div class="tokens">';
+            result.tokens.forEach(t => {
+                if (t.correct && !t.accentOnly) {
+                    html += `<span class="tok-ok">${t.expected} ✓</span>  `;
+                } else if (t.accentOnly) {
+                    html += `<span class="tok-accent">${t.got} → ${t.expected} (accent)  ${t.message ? '— ' + t.message : ''}</span>  `;
+                } else {
+                    html += `<span class="tok-wrong">${t.got} → ${t.expected}  — ${t.message}</span>  `;
+                }
+            });
+            html += '</div>';
+        }
+
+        caseEl.innerHTML = html;
+        suiteEl.appendChild(caseEl);
+
+        if (ok) passed++; else failed++;
+    }
+
+    out.appendChild(suiteEl);
+}
+
+const summaryEl = document.createElement('div');
+summaryEl.className = `summary ${failed === 0 ? 'all-pass' : 'has-fail'}`;
+summaryEl.textContent = `${passed + failed} tests: ${passed} passed, ${failed} failed`;
+out.appendChild(summaryEl);
+</script>
+</body>
+</html>

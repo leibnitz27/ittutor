@@ -1,0 +1,1192 @@
+[
+  {
+    "it": "gatto",
+    "en": [
+      "cat"
+    ],
+    "gender": "m",
+    "plural": "gatti",
+    "article_class": "standard",
+    "tier": 2,
+    "feminine": "gatta",
+    "animate": true
+  },
+  {
+    "it": "pollo",
+    "en": [
+      "chicken"
+    ],
+    "gender": "m",
+    "plural": "polli",
+    "article_class": "standard",
+    "tier": 2,
+    "animate": true
+  },
+  {
+    "it": "libro",
+    "en": [
+      "book"
+    ],
+    "gender": "m",
+    "plural": "libri",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "cane",
+    "en": [
+      "dog"
+    ],
+    "gender": "m",
+    "plural": "cani",
+    "article_class": "standard",
+    "tier": 2,
+    "notes": "Ends in -e but masculine",
+    "feminine": "cagna",
+    "animate": true
+  },
+  {
+    "it": "ragazzo",
+    "en": [
+      "boy"
+    ],
+    "gender": "m",
+    "plural": "ragazzi",
+    "article_class": "standard",
+    "tier": 1,
+    "animate": true
+  },
+  {
+    "it": "zaino",
+    "en": [
+      "rucksack",
+      "backpack"
+    ],
+    "gender": "m",
+    "plural": "zaini",
+    "article_class": "lo",
+    "tier": 3,
+    "notes": "Starts with z — takes lo/gli"
+  },
+  {
+    "it": "studente",
+    "en": [
+      "student"
+    ],
+    "gender": "m",
+    "plural": "studenti",
+    "article_class": "lo",
+    "tier": 2,
+    "notes": "Starts with s+consonant — takes lo/gli",
+    "animate": true
+  },
+  {
+    "it": "amico",
+    "en": [
+      "friend"
+    ],
+    "gender": "m",
+    "plural": "amici",
+    "article_class": "vowel",
+    "tier": 1,
+    "notes": "Plural amici (not amicos) — c before i gives /tʃ/ sound",
+    "feminine": "amica",
+    "animate": true
+  },
+  {
+    "it": "uomo",
+    "en": [
+      "man"
+    ],
+    "gender": "m",
+    "plural": "uomini",
+    "article_class": "vowel",
+    "tier": 1,
+    "notes": "Highly irregular plural",
+    "animate": true
+  },
+  {
+    "it": "problema",
+    "en": [
+      "problem"
+    ],
+    "gender": "m",
+    "plural": "problemi",
+    "article_class": "standard",
+    "tier": 1,
+    "notes": "Masculine despite -a ending — Greek origin. il problema, i problemi"
+  },
+  {
+    "it": "cagna",
+    "en": [
+      "female dog",
+      "bitch"
+    ],
+    "en_base": "dog",
+    "gender": "f",
+    "plural": "cagne",
+    "article_class": "standard",
+    "tier": 3,
+    "masculine": "cane",
+    "warning": "Cagna is the correct Italian term for a female dog, but it is also used as a strong insult (equivalent to 'bitch' in English). Use it accurately; be aware of context.",
+    "animate": true
+  },
+  {
+    "it": "gatta",
+    "en": [
+      "cat"
+    ],
+    "en_base": "cat",
+    "gender": "f",
+    "plural": "gatte",
+    "article_class": "standard",
+    "tier": 2,
+    "masculine": "gatto",
+    "animate": true
+  },
+  {
+    "it": "polpetta",
+    "en": [
+      "meatball"
+    ],
+    "gender": "f",
+    "plural": "polpette",
+    "article_class": "standard",
+    "tier": 3
+  },
+  {
+    "it": "ragazza",
+    "en": [
+      "girl"
+    ],
+    "gender": "f",
+    "plural": "ragazze",
+    "article_class": "standard",
+    "tier": 1,
+    "animate": true
+  },
+  {
+    "it": "casa",
+    "en": [
+      "house",
+      "home"
+    ],
+    "gender": "f",
+    "plural": "case",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "pizza",
+    "en": [
+      "pizza"
+    ],
+    "gender": "f",
+    "plural": "pizze",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "scuola",
+    "en": [
+      "school"
+    ],
+    "gender": "f",
+    "plural": "scuole",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "borsa",
+    "en": [
+      "bag",
+      "handbag"
+    ],
+    "gender": "f",
+    "plural": "borse",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "estate",
+    "en": [
+      "summer"
+    ],
+    "gender": "f",
+    "plural": "estati",
+    "article_class": "vowel",
+    "tier": 2
+  },
+  {
+    "it": "amica",
+    "en": [
+      "friend"
+    ],
+    "en_base": "friend",
+    "gender": "f",
+    "plural": "amiche",
+    "article_class": "vowel",
+    "tier": 1,
+    "masculine": "amico",
+    "notes": "Plural amiche (not amice) — h inserted to preserve /k/ sound before -e",
+    "animate": true
+  },
+  {
+    "it": "mano",
+    "en": [
+      "hand"
+    ],
+    "gender": "f",
+    "plural": "mani",
+    "article_class": "standard",
+    "tier": 1,
+    "notes": "Feminine despite -o ending. Irregular plural."
+  },
+  {
+    "it": "volpe",
+    "en": [
+      "fox"
+    ],
+    "gender": "f",
+    "plural": "volpi",
+    "article_class": "standard",
+    "tier": 2,
+    "epicene": true,
+    "notes": "Grammatically feminine always. Biological sex stated separately if needed: 'la volpe maschio'. Grammar never changes.",
+    "animate": true
+  },
+  {
+    "it": "città",
+    "en": [
+      "city",
+      "town"
+    ],
+    "gender": "f",
+    "plural": "città",
+    "article_class": "standard",
+    "tier": 1,
+    "notes": "Invariable plural — nouns ending in accented vowel do not change"
+  },
+  {
+    "it": "cibo",
+    "en": [
+      "food"
+    ],
+    "gender": "m",
+    "plural": "cibi",
+    "article_class": "standard",
+    "tier": 1,
+    "singular_only": true
+  },
+  {
+    "it": "edificio",
+    "en": [
+      "building"
+    ],
+    "gender": "m",
+    "plural": "edifici",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "cinema",
+    "en": [
+      "cinema",
+      "movie theatre"
+    ],
+    "gender": "m",
+    "plural": "cinema",
+    "article_class": "standard",
+    "tier": 2,
+    "notes": "Invariable plural — foreign loanword does not change"
+  },
+  {
+    "it": "negozio",
+    "en": [
+      "shop",
+      "store"
+    ],
+    "gender": "m",
+    "plural": "negozi",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "formaggio",
+    "en": [
+      "cheese"
+    ],
+    "gender": "m",
+    "plural": "formaggi",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "frutto",
+    "en": [
+      "fruit"
+    ],
+    "gender": "m",
+    "plural": "frutti",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "verdura",
+    "en": [
+      "vegetable",
+      "vegetables"
+    ],
+    "gender": "f",
+    "plural": "verdure",
+    "article_class": "standard",
+    "tier": 2,
+    "singular_only": true
+  },
+  {
+    "it": "macchina",
+    "en": [
+      "car"
+    ],
+    "gender": "f",
+    "plural": "macchine",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "bicicletta",
+    "en": [
+      "bicycle",
+      "bike"
+    ],
+    "gender": "f",
+    "plural": "biciclette",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "strada",
+    "en": [
+      "road",
+      "street"
+    ],
+    "gender": "f",
+    "plural": "strade",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "albero",
+    "en": [
+      "tree"
+    ],
+    "gender": "m",
+    "plural": "alberi",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "moglie",
+    "en": [
+      "wife"
+    ],
+    "gender": "f",
+    "plural": "mogli",
+    "article_class": "standard",
+    "tier": 2,
+    "notes": "Irregular plural mogli (not *mogle)",
+    "animate": true
+  },
+  {
+    "it": "marito",
+    "en": [
+      "husband"
+    ],
+    "gender": "m",
+    "plural": "mariti",
+    "article_class": "standard",
+    "tier": 2,
+    "animate": true
+  },
+  {
+    "it": "sorella",
+    "en": [
+      "sister"
+    ],
+    "gender": "f",
+    "plural": "sorelle",
+    "article_class": "standard",
+    "tier": 1,
+    "animate": true
+  },
+  {
+    "it": "fratello",
+    "en": [
+      "brother"
+    ],
+    "gender": "m",
+    "plural": "fratelli",
+    "article_class": "standard",
+    "tier": 1,
+    "animate": true
+  },
+  {
+    "it": "cavallo",
+    "en": [
+      "horse"
+    ],
+    "gender": "m",
+    "plural": "cavalli",
+    "article_class": "standard",
+    "tier": 2,
+    "animate": true
+  },
+  {
+    "it": "mucca",
+    "en": [
+      "cow"
+    ],
+    "gender": "f",
+    "plural": "mucche",
+    "article_class": "standard",
+    "tier": 2,
+    "notes": "Plural mucche — h inserted to preserve /k/ sound before -e",
+    "animate": true
+  },
+  {
+    "it": "anno",
+    "en": [
+      "year"
+    ],
+    "gender": "m",
+    "plural": "anni",
+    "article_class": "vowel",
+    "tier": 1
+  },
+  {
+    "it": "giorno",
+    "en": [
+      "day"
+    ],
+    "gender": "m",
+    "plural": "giorni",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "mese",
+    "en": [
+      "month"
+    ],
+    "gender": "m",
+    "plural": "mesi",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "settimana",
+    "en": [
+      "week"
+    ],
+    "gender": "f",
+    "plural": "settimane",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "mattina",
+    "en": [
+      "morning"
+    ],
+    "gender": "f",
+    "plural": "mattine",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "notte",
+    "en": [
+      "night"
+    ],
+    "gender": "f",
+    "plural": "notti",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "tempo",
+    "en": [
+      "time",
+      "weather"
+    ],
+    "gender": "m",
+    "plural": "tempi",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "mondo",
+    "en": [
+      "world"
+    ],
+    "gender": "m",
+    "plural": "mondi",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "vita",
+    "en": [
+      "life"
+    ],
+    "gender": "f",
+    "plural": "vite",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "madre",
+    "en": [
+      "mother"
+    ],
+    "gender": "f",
+    "plural": "madri",
+    "article_class": "standard",
+    "tier": 1,
+    "animate": true
+  },
+  {
+    "it": "padre",
+    "en": [
+      "father"
+    ],
+    "gender": "m",
+    "plural": "padri",
+    "article_class": "standard",
+    "tier": 1,
+    "animate": true
+  },
+  {
+    "it": "famiglia",
+    "en": [
+      "family"
+    ],
+    "gender": "f",
+    "plural": "famiglie",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "nome",
+    "en": [
+      "name"
+    ],
+    "gender": "m",
+    "plural": "nomi",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "lavoro",
+    "en": [
+      "work",
+      "job"
+    ],
+    "gender": "m",
+    "plural": "lavori",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "posto",
+    "en": [
+      "place",
+      "spot"
+    ],
+    "gender": "m",
+    "plural": "posti",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "parte",
+    "en": [
+      "part"
+    ],
+    "gender": "f",
+    "plural": "parti",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "acqua",
+    "en": [
+      "water"
+    ],
+    "gender": "f",
+    "plural": "acque",
+    "article_class": "vowel",
+    "tier": 1,
+    "singular_only": true
+  },
+  {
+    "it": "sole",
+    "en": [
+      "sun"
+    ],
+    "gender": "m",
+    "plural": "soli",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "mare",
+    "en": [
+      "sea"
+    ],
+    "gender": "m",
+    "plural": "mari",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "paese",
+    "en": [
+      "country",
+      "village"
+    ],
+    "gender": "m",
+    "plural": "paesi",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "corpo",
+    "en": [
+      "body"
+    ],
+    "gender": "m",
+    "plural": "corpi",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "testa",
+    "en": [
+      "head"
+    ],
+    "gender": "f",
+    "plural": "teste",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "occhio",
+    "en": [
+      "eye"
+    ],
+    "gender": "m",
+    "plural": "occhi",
+    "article_class": "vowel",
+    "tier": 1
+  },
+  {
+    "it": "idea",
+    "en": [
+      "idea"
+    ],
+    "gender": "f",
+    "plural": "idee",
+    "article_class": "vowel",
+    "tier": 1
+  },
+  {
+    "it": "persona",
+    "en": [
+      "person"
+    ],
+    "gender": "f",
+    "plural": "persone",
+    "article_class": "standard",
+    "tier": 1,
+    "epicene": true,
+    "notes": "Grammatically feminine always — 'la persona' even for a man. Adjectives and past participles agree feminine.",
+    "animate": true
+  },
+  {
+    "it": "amore",
+    "en": [
+      "love"
+    ],
+    "gender": "m",
+    "plural": "amori",
+    "article_class": "vowel",
+    "tier": 1,
+    "singular_only": true
+  },
+  {
+    "it": "porta",
+    "en": [
+      "door"
+    ],
+    "gender": "f",
+    "plural": "porte",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "camera",
+    "en": [
+      "room",
+      "bedroom"
+    ],
+    "gender": "f",
+    "plural": "camere",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "carta",
+    "en": [
+      "paper",
+      "card"
+    ],
+    "gender": "f",
+    "plural": "carte",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "musica",
+    "en": [
+      "music"
+    ],
+    "gender": "f",
+    "plural": "musiche",
+    "article_class": "standard",
+    "tier": 1,
+    "singular_only": true
+  },
+  {
+    "it": "arte",
+    "en": [
+      "art"
+    ],
+    "gender": "f",
+    "plural": "arti",
+    "article_class": "vowel",
+    "tier": 1
+  },
+  {
+    "it": "luce",
+    "en": [
+      "light"
+    ],
+    "gender": "f",
+    "plural": "luci",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "voce",
+    "en": [
+      "voice"
+    ],
+    "gender": "f",
+    "plural": "voci",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "letto",
+    "en": [
+      "bed"
+    ],
+    "gender": "m",
+    "plural": "letti",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "cuore",
+    "en": [
+      "heart"
+    ],
+    "gender": "m",
+    "plural": "cuori",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "stella",
+    "en": [
+      "star"
+    ],
+    "gender": "f",
+    "plural": "stelle",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "numero",
+    "en": [
+      "number"
+    ],
+    "gender": "m",
+    "plural": "numeri",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "donna",
+    "en": [
+      "woman"
+    ],
+    "gender": "f",
+    "plural": "donne",
+    "article_class": "standard",
+    "tier": 1,
+    "animate": true
+  },
+  {
+    "it": "animale",
+    "en": [
+      "animal"
+    ],
+    "gender": "m",
+    "plural": "animali",
+    "article_class": "vowel",
+    "tier": 2
+  },
+  {
+    "it": "pesce",
+    "en": [
+      "fish"
+    ],
+    "gender": "m",
+    "plural": "pesci",
+    "article_class": "standard",
+    "tier": 2,
+    "animate": true
+  },
+  {
+    "it": "montagna",
+    "en": [
+      "mountain"
+    ],
+    "gender": "f",
+    "plural": "montagne",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "fiume",
+    "en": [
+      "river"
+    ],
+    "gender": "m",
+    "plural": "fiumi",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "luna",
+    "en": [
+      "moon"
+    ],
+    "gender": "f",
+    "plural": "lune",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "isola",
+    "en": [
+      "island"
+    ],
+    "gender": "f",
+    "plural": "isole",
+    "article_class": "vowel",
+    "tier": 2
+  },
+  {
+    "it": "barca",
+    "en": [
+      "boat"
+    ],
+    "gender": "f",
+    "plural": "barche",
+    "article_class": "standard",
+    "tier": 2,
+    "notes": "Plural barche — h inserted to preserve /k/ sound before -e"
+  },
+  {
+    "it": "treno",
+    "en": [
+      "train"
+    ],
+    "gender": "m",
+    "plural": "treni",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "oceano",
+    "en": [
+      "ocean"
+    ],
+    "gender": "m",
+    "plural": "oceani",
+    "article_class": "vowel",
+    "tier": 2
+  },
+  {
+    "it": "colore",
+    "en": [
+      "colour",
+      "color"
+    ],
+    "gender": "m",
+    "plural": "colori",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "finestra",
+    "en": [
+      "window"
+    ],
+    "gender": "f",
+    "plural": "finestre",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "foresta",
+    "en": [
+      "forest"
+    ],
+    "gender": "f",
+    "plural": "foreste",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "cielo",
+    "en": [
+      "sky"
+    ],
+    "gender": "m",
+    "plural": "cieli",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "muro",
+    "en": [
+      "wall"
+    ],
+    "gender": "m",
+    "plural": "muri",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "gamba",
+    "en": [
+      "leg"
+    ],
+    "gender": "f",
+    "plural": "gambe",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "mente",
+    "en": [
+      "mind"
+    ],
+    "gender": "f",
+    "plural": "menti",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "spazio",
+    "en": [
+      "space"
+    ],
+    "gender": "m",
+    "plural": "spazi",
+    "article_class": "lo",
+    "tier": 2,
+    "notes": "Starts with s+consonant — takes lo/gli"
+  },
+  {
+    "it": "sistema",
+    "en": [
+      "system"
+    ],
+    "gender": "m",
+    "plural": "sistemi",
+    "article_class": "standard",
+    "tier": 2,
+    "notes": "Masculine despite -a ending — Greek origin, like problema"
+  },
+  {
+    "it": "lettera",
+    "en": [
+      "letter"
+    ],
+    "gender": "f",
+    "plural": "lettere",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "gruppo",
+    "en": [
+      "group"
+    ],
+    "gender": "m",
+    "plural": "gruppi",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "uccello",
+    "en": [
+      "bird"
+    ],
+    "gender": "m",
+    "plural": "uccelli",
+    "article_class": "vowel",
+    "tier": 2,
+    "animate": true
+  },
+  {
+    "it": "fiore",
+    "en": [
+      "flower"
+    ],
+    "gender": "m",
+    "plural": "fiori",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "bambino",
+    "en": [
+      "child",
+      "boy"
+    ],
+    "gender": "m",
+    "plural": "bambini",
+    "article_class": "standard",
+    "tier": 2,
+    "feminine": "bambina",
+    "animate": true
+  },
+  {
+    "it": "bambina",
+    "en": [
+      "child",
+      "girl"
+    ],
+    "en_base": "child",
+    "gender": "f",
+    "plural": "bambine",
+    "article_class": "standard",
+    "tier": 2,
+    "masculine": "bambino",
+    "animate": true
+  },
+  {
+    "it": "erba",
+    "en": [
+      "grass",
+      "herb"
+    ],
+    "gender": "f",
+    "plural": "erbe",
+    "article_class": "vowel",
+    "tier": 3,
+    "singular_only": true
+  },
+  {
+    "it": "sera",
+    "en": [
+      "evening"
+    ],
+    "gender": "f",
+    "plural": "sere",
+    "article_class": "standard",
+    "tier": 3
+  },
+  {
+    "it": "vittima",
+    "en": [
+      "victim"
+    ],
+    "gender": "f",
+    "plural": "vittime",
+    "article_class": "standard",
+    "tier": 2,
+    "epicene": true,
+    "notes": "Grammatically feminine always — 'la vittima' even for a male victim.",
+    "animate": true
+  },
+  {
+    "it": "guardia",
+    "en": [
+      "guard"
+    ],
+    "gender": "f",
+    "plural": "guardie",
+    "article_class": "standard",
+    "tier": 2,
+    "epicene": true,
+    "notes": "Grammatically feminine always — 'la guardia' regardless of the guard's sex.",
+    "animate": true
+  },
+  {
+    "it": "spia",
+    "en": [
+      "spy"
+    ],
+    "gender": "f",
+    "plural": "spie",
+    "article_class": "standard",
+    "tier": 3,
+    "epicene": true,
+    "notes": "Grammatically feminine always — 'la spia' even for a male spy.",
+    "animate": true
+  },
+  {
+    "it": "sentinella",
+    "en": [
+      "sentry",
+      "sentinel"
+    ],
+    "gender": "f",
+    "plural": "sentinelle",
+    "article_class": "standard",
+    "tier": 3,
+    "epicene": true,
+    "notes": "Grammatically feminine always — 'la sentinella' even for a male sentry.",
+    "animate": true
+  },
+  {
+    "it": "soprano",
+    "en": [
+      "soprano"
+    ],
+    "gender": "m",
+    "plural": "soprani",
+    "article_class": "standard",
+    "tier": 3,
+    "epicene": true,
+    "notes": "Traditionally masculine grammatically — 'il soprano' even for a female singer. Modern Italian increasingly uses 'la soprano' for women, but the classical form is masculine.",
+    "animate": true
+  }
+]

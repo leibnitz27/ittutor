@@ -1,0 +1,117 @@
+[
+  {
+    "id": "adj_gender_agreement",
+    "title": "Adjective gender agreement",
+    "explanation": "Italian adjectives must agree with the noun they describe in gender. Masculine nouns take masculine adjective endings, feminine nouns take feminine endings. For 4-form adjectives: masculine ends in -o (rosso), feminine ends in -a (rossa). For 2-form adjectives: the form is the same for both genders (triste).",
+    "examples": [
+      { "it": "il gatto rosso", "en": "the red cat (masculine)" },
+      { "it": "la borsa rossa", "en": "the red bag (feminine)" },
+      { "it": "il cane triste", "en": "the sad dog (masculine, 2-form)" },
+      { "it": "la ragazza triste", "en": "the sad girl (feminine, 2-form — same form)" }
+    ]
+  },
+  {
+    "id": "adj_number_agreement",
+    "title": "Adjective number agreement",
+    "explanation": "Italian adjectives must agree with the noun they describe in number. Singular nouns take singular adjective endings, plural nouns take plural endings. For 4-form adjectives: masculine plural ends in -i (rossi), feminine plural ends in -e (rosse). For 2-form adjectives: plural ends in -i regardless of gender (tristi).",
+    "examples": [
+      { "it": "il gatto rosso", "en": "the red cat (singular)" },
+      { "it": "i gatti rossi", "en": "the red cats (masculine plural)" },
+      { "it": "la borsa rossa", "en": "the red bag (singular)" },
+      { "it": "le borse rosse", "en": "the red bags (feminine plural)" }
+    ]
+  },
+  {
+    "id": "adj_invariable",
+    "title": "Invariable adjectives",
+    "explanation": "Some Italian adjectives do not change form for gender or number. Common examples are colour words borrowed from other languages or nouns used as colours: blu (blue), rosa (pink), viola (purple). Use the same form regardless of the noun.",
+    "examples": [
+      { "it": "lo zaino blu", "en": "the blue rucksack" },
+      { "it": "gli zaini blu", "en": "the blue rucksacks" },
+      { "it": "la borsa blu", "en": "the blue bag" },
+      { "it": "le borse blu", "en": "the blue bags" }
+    ]
+  },
+  {
+    "id": "article_definite",
+    "title": "Definite articles",
+    "explanation": "The definite article ('the') in Italian depends on the gender of the noun and the first letter(s) of the following word. Masculine singular: il (standard), lo (before z, s+consonant, ps, gn, x, y), l' (before vowels). Masculine plural: i (standard), gli (before z, s+consonant, vowels). Feminine singular: la (standard), l' (before vowels). Feminine plural: le.",
+    "examples": [
+      { "it": "il gatto / i gatti", "en": "the cat / the cats (standard masculine)" },
+      { "it": "lo zaino / gli zaini", "en": "the rucksack / the rucksacks (z)" },
+      { "it": "lo studente / gli studenti", "en": "the student / the students (s+cons)" },
+      { "it": "l'amico / gli amici", "en": "the friend / the friends (vowel, masculine)" },
+      { "it": "la casa / le case", "en": "the house / the houses (standard feminine)" },
+      { "it": "l'estate / le estati", "en": "the summer / the summers (vowel, feminine)" }
+    ]
+  },
+  {
+    "id": "article_indefinite",
+    "title": "Indefinite articles",
+    "explanation": "The indefinite article ('a' / 'an') in Italian: un (masculine standard), uno (masculine before z, s+consonant, ps, gn, x, y), una (feminine standard), un' (feminine before vowels). There is no plural indefinite article; use the partitive (dei, delle) or no article.",
+    "examples": [
+      { "it": "un gatto", "en": "a cat (standard masculine)" },
+      { "it": "uno zaino", "en": "a rucksack (z)" },
+      { "it": "uno studente", "en": "a student (s+cons)" },
+      { "it": "una casa", "en": "a house (standard feminine)" },
+      { "it": "un'amica", "en": "a friend (vowel, feminine)" }
+    ]
+  },
+  {
+    "id": "noun_gender",
+    "title": "Noun gender",
+    "explanation": "Every Italian noun has a grammatical gender — masculine or feminine. Gender is not always predictable from the ending. Nouns ending in -o are usually masculine (gatto, libro) and those ending in -a are usually feminine (casa, ragazza), but there are important exceptions. 'Mano' (hand) ends in -o but is feminine. 'Problema' (problem) ends in -a but is masculine (like many words of Greek origin). Gender must be learned with each noun.",
+    "examples": [
+      { "it": "la mano", "en": "the hand (feminine despite -o ending)" },
+      { "it": "il problema", "en": "the problem (masculine despite -a ending)" },
+      { "it": "il cane", "en": "the dog (masculine, ends in -e)" },
+      { "it": "l'estate", "en": "the summer (feminine, ends in -e)" }
+    ]
+  },
+  {
+    "id": "noun_plural",
+    "title": "Noun plurals",
+    "explanation": "Most Italian nouns form their plural by changing the final vowel: -o → -i (gatto/gatti), -a → -e (ragazza/ragazze), -e → -i (cane/cani). Some nouns have irregular plurals that must be memorised: uomo/uomini, mano/mani. Nouns ending in an accented vowel do not change in the plural: città/città.",
+    "examples": [
+      { "it": "gatto → gatti", "en": "cat → cats (-o to -i)" },
+      { "it": "ragazza → ragazze", "en": "girl → girls (-a to -e)" },
+      { "it": "cane → cani", "en": "dog → dogs (-e to -i)" },
+      { "it": "uomo → uomini", "en": "man → men (irregular)" },
+      { "it": "città → città", "en": "city → cities (invariable)" }
+    ]
+  },
+  {
+    "id": "ci_sono",
+    "title": "Ci sono / C'è",
+    "explanation": "'C'è' means 'there is' (singular). 'Ci sono' means 'there are' (plural). These are fixed constructions used to state that something exists or is present. Unlike English, the word order does not change for questions — intonation signals the question.",
+    "examples": [
+      { "it": "C'è un problema", "en": "There is a problem" },
+      { "it": "Ci sono polpette", "en": "There are meatballs" },
+      { "it": "C'è un gatto?", "en": "Is there a cat?" },
+      { "it": "Ci sono studenti?", "en": "Are there students?" }
+    ]
+  },
+  {
+    "id": "possessive_article",
+    "title": "Possessives require the definite article",
+    "explanation": "Italian possessives are always accompanied by the definite article: il mio, la mia, i miei, le mie (my), il tuo, la tua etc. The article agrees with the noun owned, not the owner. Important exception: singular unmodified family members drop the article — 'mio padre' (not il mio padre), 'mia madre', 'mio fratello'. This exception does not apply with 'loro' (il loro padre) or with modified/plural family nouns.",
+    "examples": [
+      { "it": "il mio gatto", "en": "my cat (masculine singular)" },
+      { "it": "la mia casa", "en": "my house (feminine singular)" },
+      { "it": "i miei libri", "en": "my books (masculine plural)" },
+      { "it": "mio padre", "en": "my father (singular family member — no article)" },
+      { "it": "il loro padre", "en": "their father (loro always keeps the article)" }
+    ]
+  },
+  {
+    "id": "ogni",
+    "title": "Ogni — every",
+    "explanation": "'Ogni' (every) is invariable and always takes a singular noun, regardless of meaning. It does not change form for gender.",
+    "examples": [
+      { "it": "ogni anno", "en": "every year" },
+      { "it": "ogni estate", "en": "every summer" },
+      { "it": "ogni giorno", "en": "every day" },
+      { "it": "ogni studente", "en": "every student" }
+    ]
+  }
+]

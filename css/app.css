@@ -1,0 +1,56 @@
+/* app.css */
+
+body {
+    background-color: #f0f2f5;
+}
+
+#app {
+    max-width: 640px;
+}
+
+/* Prompt */
+.prompt-text {
+    min-height: 2.5rem;
+    line-height: 1.4;
+}
+
+.hint-text {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Accent buttons */
+.accent-btn {
+    min-width: 2.4rem;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* Token colouring in feedback */
+.answer-tokens {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.token-ok     { color: #198754; }
+.token-err    { color: #dc3545; text-decoration: underline; cursor: help; }
+.token-accent { color: #fd7e14; cursor: help; }
+
+/* Streak */
+.streak-text {
+    font-size: 0.8rem;
+}
+
+/* Hint panel */
+.hint-panel {
+    background-color: #fff8e1;
+    border-color: #ffe082 !important;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+/* Explainer */
+#explainer-content h6 {
+    margin-bottom: 0.25rem;
+}

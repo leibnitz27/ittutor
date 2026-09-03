@@ -1,0 +1,867 @@
+[
+  {
+    "it": "rosso",
+    "en": [
+      "red"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "rosso",
+      "fs": "rossa",
+      "mp": "rossi",
+      "fp": "rosse"
+    },
+    "position": "post",
+    "tier": 1
+  },
+  {
+    "it": "malato",
+    "en": [
+      "sick",
+      "ill"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "malato",
+      "fs": "malata",
+      "mp": "malati",
+      "fp": "malate"
+    },
+    "position": "post",
+    "tier": 2,
+    "animate_only": true
+  },
+  {
+    "it": "buono",
+    "en": [
+      "good"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "buono",
+      "fs": "buona",
+      "mp": "buoni",
+      "fp": "buone"
+    },
+    "position": "either",
+    "tier": 1,
+    "notes": "Before masculine singular nouns: buon (standard) or buono (before s+cons, z). In predicative position always buono/buona etc."
+  },
+  {
+    "it": "piccolo",
+    "en": [
+      "small",
+      "little"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "piccolo",
+      "fs": "piccola",
+      "mp": "piccoli",
+      "fp": "piccole"
+    },
+    "position": "either",
+    "tier": 1
+  },
+  {
+    "it": "impegnato",
+    "en": [
+      "busy",
+      "engaged"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "impegnato",
+      "fs": "impegnata",
+      "mp": "impegnati",
+      "fp": "impegnate"
+    },
+    "position": "post",
+    "tier": 2,
+    "animate_only": true
+  },
+  {
+    "it": "triste",
+    "en": [
+      "sad"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "triste",
+      "fs": "triste",
+      "mp": "tristi",
+      "fp": "tristi"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "grande",
+    "en": [
+      "big",
+      "large",
+      "great"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "grande",
+      "fs": "grande",
+      "mp": "grandi",
+      "fp": "grandi"
+    },
+    "position": "either",
+    "tier": 1,
+    "notes": "Can become gran before consonant or grand' before vowel in pre-noun position"
+  },
+  {
+    "it": "felice",
+    "en": [
+      "happy"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "felice",
+      "fs": "felice",
+      "mp": "felici",
+      "fp": "felici"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "blu",
+    "en": [
+      "blue"
+    ],
+    "agreement": "invariable",
+    "forms": {
+      "ms": "blu",
+      "fs": "blu",
+      "mp": "blu",
+      "fp": "blu"
+    },
+    "position": "post",
+    "tier": 2,
+    "notes": "Invariable — does not change for gender or number"
+  },
+  {
+    "it": "rosa",
+    "en": [
+      "pink"
+    ],
+    "agreement": "invariable",
+    "forms": {
+      "ms": "rosa",
+      "fs": "rosa",
+      "mp": "rosa",
+      "fp": "rosa"
+    },
+    "position": "post",
+    "tier": 3,
+    "notes": "Invariable — does not change for gender or number"
+  },
+  {
+    "it": "furbo",
+    "en": [
+      "cunning",
+      "crafty",
+      "sly"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "furbo",
+      "fs": "furba",
+      "mp": "furbi",
+      "fp": "furbe"
+    },
+    "position": "post",
+    "tier": 2,
+    "synonyms": [
+      "astuto"
+    ],
+    "animate_only": true
+  },
+  {
+    "it": "astuto",
+    "en": [
+      "shrewd",
+      "astute"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "astuto",
+      "fs": "astuta",
+      "mp": "astuti",
+      "fp": "astute"
+    },
+    "position": "post",
+    "tier": 3,
+    "synonyms": [
+      "furbo"
+    ],
+    "animate_only": true
+  },
+  {
+    "it": "rumoroso",
+    "en": [
+      "loud",
+      "noisy"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "rumoroso",
+      "fs": "rumorosa",
+      "mp": "rumorosi",
+      "fp": "rumorose"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "stanco",
+    "en": [
+      "tired"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "stanco",
+      "fs": "stanca",
+      "mp": "stanchi",
+      "fp": "stanche"
+    },
+    "position": "post",
+    "tier": 2,
+    "notes": "Plural stanchi/stanche (not *stanci/*stance) — h inserted to preserve /k/ sound before -i/-e",
+    "animate_only": true
+  },
+  {
+    "it": "interessante",
+    "en": [
+      "interesting"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "interessante",
+      "fs": "interessante",
+      "mp": "interessanti",
+      "fp": "interessanti"
+    },
+    "position": "post",
+    "tier": 1
+  },
+  {
+    "it": "noioso",
+    "en": [
+      "boring"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "noioso",
+      "fs": "noiosa",
+      "mp": "noiosi",
+      "fp": "noiose"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "silenzioso",
+    "en": [
+      "quiet",
+      "silent"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "silenzioso",
+      "fs": "silenziosa",
+      "mp": "silenziosi",
+      "fp": "silenziose"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "spaventoso",
+    "en": [
+      "scary",
+      "frightening"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "spaventoso",
+      "fs": "spaventosa",
+      "mp": "spaventosi",
+      "fp": "spaventose"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "divertente",
+    "en": [
+      "fun",
+      "entertaining"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "divertente",
+      "fs": "divertente",
+      "mp": "divertenti",
+      "fp": "divertenti"
+    },
+    "position": "post",
+    "tier": 1,
+    "synonyms": [
+      "buffo"
+    ]
+  },
+  {
+    "it": "buffo",
+    "en": [
+      "amusing",
+      "funny",
+      "comical"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "buffo",
+      "fs": "buffa",
+      "mp": "buffi",
+      "fp": "buffe"
+    },
+    "position": "post",
+    "tier": 2,
+    "synonyms": [
+      "divertente"
+    ]
+  },
+  {
+    "it": "puzzolente",
+    "en": [
+      "smelly",
+      "stinking"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "puzzolente",
+      "fs": "puzzolente",
+      "mp": "puzzolenti",
+      "fp": "puzzolenti"
+    },
+    "position": "post",
+    "tier": 3
+  },
+  {
+    "it": "delizioso",
+    "en": [
+      "delicious"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "delizioso",
+      "fs": "deliziosa",
+      "mp": "deliziosi",
+      "fp": "deliziose"
+    },
+    "position": "post",
+    "tier": 2,
+    "synonyms": [
+      "saporito"
+    ]
+  },
+  {
+    "it": "saporito",
+    "en": [
+      "tasty",
+      "flavourful"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "saporito",
+      "fs": "saporita",
+      "mp": "saporiti",
+      "fp": "saporite"
+    },
+    "position": "post",
+    "tier": 2,
+    "synonyms": [
+      "delizioso"
+    ]
+  },
+  {
+    "it": "disgustoso",
+    "en": [
+      "disgusting"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "disgustoso",
+      "fs": "disgustosa",
+      "mp": "disgustosi",
+      "fp": "disgustose"
+    },
+    "position": "post",
+    "tier": 2,
+    "synonyms": [
+      "schifoso"
+    ]
+  },
+  {
+    "it": "schifoso",
+    "en": [
+      "disgusting",
+      "gross"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "schifoso",
+      "fs": "schifosa",
+      "mp": "schifosi",
+      "fp": "schifose"
+    },
+    "position": "post",
+    "tier": 2,
+    "synonyms": [
+      "disgustoso"
+    ],
+    "notes": "Colloquial — equivalent to 'gross' in English. Commonly used in everyday speech."
+  },
+  {
+    "it": "fantastico",
+    "en": [
+      "great",
+      "fantastic"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "fantastico",
+      "fs": "fantastica",
+      "mp": "fantastici",
+      "fp": "fantastiche"
+    },
+    "position": "post",
+    "tier": 1,
+    "notes": "Plural fantastici/fantastiche — h inserted to preserve /k/ sound"
+  },
+  {
+    "it": "stupendo",
+    "en": [
+      "amazing",
+      "wonderful"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "stupendo",
+      "fs": "stupenda",
+      "mp": "stupendi",
+      "fp": "stupende"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "nuovo",
+    "en": [
+      "new"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "nuovo",
+      "fs": "nuova",
+      "mp": "nuovi",
+      "fp": "nuove"
+    },
+    "position": "either",
+    "tier": 1
+  },
+  {
+    "it": "vecchio",
+    "en": [
+      "old"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "vecchio",
+      "fs": "vecchia",
+      "mp": "vecchi",
+      "fp": "vecchie"
+    },
+    "position": "either",
+    "tier": 1
+  },
+  {
+    "it": "alto",
+    "en": [
+      "tall",
+      "high"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "alto",
+      "fs": "alta",
+      "mp": "alti",
+      "fp": "alte"
+    },
+    "position": "post",
+    "tier": 1
+  },
+  {
+    "it": "basso",
+    "en": [
+      "short",
+      "low"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "basso",
+      "fs": "bassa",
+      "mp": "bassi",
+      "fp": "basse"
+    },
+    "position": "post",
+    "tier": 1
+  },
+  {
+    "it": "lungo",
+    "en": [
+      "long"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "lungo",
+      "fs": "lunga",
+      "mp": "lunghi",
+      "fp": "lunghe"
+    },
+    "position": "post",
+    "tier": 1,
+    "notes": "Plural lunghi/lunghe — h inserted to preserve /g/ sound before -i/-e"
+  },
+  {
+    "it": "bianco",
+    "en": [
+      "white"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "bianco",
+      "fs": "bianca",
+      "mp": "bianchi",
+      "fp": "bianche"
+    },
+    "position": "post",
+    "tier": 1,
+    "notes": "Plural bianchi/bianche — h inserted to preserve /k/ sound"
+  },
+  {
+    "it": "nero",
+    "en": [
+      "black"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "nero",
+      "fs": "nera",
+      "mp": "neri",
+      "fp": "nere"
+    },
+    "position": "post",
+    "tier": 1
+  },
+  {
+    "it": "bello",
+    "en": [
+      "beautiful"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "bello",
+      "fs": "bella",
+      "mp": "belli",
+      "fp": "belle"
+    },
+    "position": "either",
+    "tier": 1,
+    "notes": "Pre-noun forms bel/bell'/belli/begli/belle used in practice"
+  },
+  {
+    "it": "cattivo",
+    "en": [
+      "bad",
+      "naughty"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "cattivo",
+      "fs": "cattiva",
+      "mp": "cattivi",
+      "fp": "cattive"
+    },
+    "position": "post",
+    "tier": 1
+  },
+  {
+    "it": "brutto",
+    "en": [
+      "ugly"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "brutto",
+      "fs": "brutta",
+      "mp": "brutti",
+      "fp": "brutte"
+    },
+    "position": "post",
+    "tier": 1
+  },
+  {
+    "it": "verde",
+    "en": [
+      "green"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "verde",
+      "fs": "verde",
+      "mp": "verdi",
+      "fp": "verdi"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "giallo",
+    "en": [
+      "yellow"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "giallo",
+      "fs": "gialla",
+      "mp": "gialli",
+      "fp": "gialle"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "freddo",
+    "en": [
+      "cold"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "freddo",
+      "fs": "fredda",
+      "mp": "freddi",
+      "fp": "fredde"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "caldo",
+    "en": [
+      "warm",
+      "hot"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "caldo",
+      "fs": "calda",
+      "mp": "caldi",
+      "fp": "calde"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "forte",
+    "en": [
+      "strong",
+      "loud"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "forte",
+      "fs": "forte",
+      "mp": "forti",
+      "fp": "forti"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "veloce",
+    "en": [
+      "fast"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "veloce",
+      "fs": "veloce",
+      "mp": "veloci",
+      "fp": "veloci"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "lento",
+    "en": [
+      "slow"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "lento",
+      "fs": "lenta",
+      "mp": "lenti",
+      "fp": "lente"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "pulito",
+    "en": [
+      "clean"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "pulito",
+      "fs": "pulita",
+      "mp": "puliti",
+      "fp": "pulite"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "sporco",
+    "en": [
+      "dirty"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "sporco",
+      "fs": "sporca",
+      "mp": "sporchi",
+      "fp": "sporche"
+    },
+    "position": "post",
+    "tier": 2,
+    "notes": "Plural sporchi/sporche — h inserted to preserve /k/ sound"
+  },
+  {
+    "it": "dolce",
+    "en": [
+      "sweet"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "dolce",
+      "fs": "dolce",
+      "mp": "dolci",
+      "fp": "dolci"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "giovane",
+    "en": [
+      "young"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "giovane",
+      "fs": "giovane",
+      "mp": "giovani",
+      "fp": "giovani"
+    },
+    "position": "either",
+    "tier": 2
+  },
+  {
+    "it": "povero",
+    "en": [
+      "poor"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "povero",
+      "fs": "povera",
+      "mp": "poveri",
+      "fp": "povere"
+    },
+    "position": "post",
+    "tier": 2
+  },
+  {
+    "it": "ricco",
+    "en": [
+      "rich"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "ricco",
+      "fs": "ricca",
+      "mp": "ricchi",
+      "fp": "ricche"
+    },
+    "position": "post",
+    "tier": 2,
+    "notes": "Plural ricchi/ricche — h inserted to preserve /k/ sound"
+  },
+  {
+    "it": "tranquillo",
+    "en": [
+      "calm",
+      "peaceful"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "tranquillo",
+      "fs": "tranquilla",
+      "mp": "tranquilli",
+      "fp": "tranquille"
+    },
+    "position": "post",
+    "tier": 2,
+    "synonyms": [
+      "silenzioso"
+    ]
+  },
+  {
+    "it": "pesante",
+    "en": [
+      "heavy"
+    ],
+    "agreement": "2form",
+    "forms": {
+      "ms": "pesante",
+      "fs": "pesante",
+      "mp": "pesanti",
+      "fp": "pesanti"
+    },
+    "position": "post",
+    "tier": 3
+  },
+  {
+    "it": "leggero",
+    "en": [
+      "light",
+      "lightweight"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "leggero",
+      "fs": "leggera",
+      "mp": "leggeri",
+      "fp": "leggere"
+    },
+    "position": "post",
+    "tier": 3
+  }
+]

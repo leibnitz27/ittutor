@@ -1,0 +1,27 @@
+[
+  {
+    "it": "ci sono",
+    "en": ["there are"],
+    "notes": "Existential construction, plural. Ci sono polpette — there are meatballs."
+  },
+  {
+    "it": "c'è",
+    "en": ["there is"],
+    "notes": "Existential construction, singular. C'è un problema — there is a problem."
+  },
+  {
+    "it": "bene, grazie",
+    "en": ["well, thank you", "fine, thank you"],
+    "notes": "Standard response to 'come stai'. Bene = well (adverb), not 'good' (adjective)."
+  },
+  {
+    "it": "ogni anno",
+    "en": ["every year"],
+    "notes": "Ogni always takes a singular noun: ogni anno, ogni estate, ogni giorno."
+  },
+  {
+    "it": "anche noi",
+    "en": ["we too", "we also"],
+    "notes": "Anche precedes the pronoun or noun it modifies. Anche noi visitiamo Roma — we also visit Rome."
+  }
+]

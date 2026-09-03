@@ -1,0 +1,596 @@
+[
+  {
+    "it": "visitare",
+    "en": ["to visit"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "visito",
+      "tu":   "visiti",
+      "lui":  "visita",
+      "noi":  "visitiamo",
+      "voi":  "visitate",
+      "loro": "visitano"
+    },
+    "tier": 2
+  },
+  {
+    "it": "viaggiare",
+    "en": ["to travel"],
+    "class": "are_iare",
+    "irregular": false,
+    "present": {
+      "io":   "viaggio",
+      "tu":   "viaggi",
+      "lui":  "viaggia",
+      "noi":  "viaggiamo",
+      "voi":  "viaggiate",
+      "loro": "viaggiano"
+    },
+    "tier": 2,
+    "notes": "-iare verb: tu drops the double-i (viaggi not *viaggii)"
+  },
+  {
+    "it": "mangiare",
+    "en": ["to eat"],
+    "class": "are_iare",
+    "irregular": false,
+    "present": {
+      "io":   "mangio",
+      "tu":   "mangi",
+      "lui":  "mangia",
+      "noi":  "mangiamo",
+      "voi":  "mangiate",
+      "loro": "mangiano"
+    },
+    "tier": 1,
+    "notes": "-iare verb: tu drops the double-i (mangi not *mangii)"
+  },
+  {
+    "it": "vedere",
+    "en": ["to see"],
+    "class": "ere",
+    "irregular": false,
+    "present": {
+      "io":   "vedo",
+      "tu":   "vedi",
+      "lui":  "vede",
+      "noi":  "vediamo",
+      "voi":  "vedete",
+      "loro": "vedono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "scrivere",
+    "en": ["to write"],
+    "class": "ere",
+    "irregular": false,
+    "present": {
+      "io":   "scrivo",
+      "tu":   "scrivi",
+      "lui":  "scrive",
+      "noi":  "scriviamo",
+      "voi":  "scrivete",
+      "loro": "scrivono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "dormire",
+    "en": ["to sleep"],
+    "class": "ire",
+    "irregular": false,
+    "present": {
+      "io":   "dormo",
+      "tu":   "dormi",
+      "lui":  "dorme",
+      "noi":  "dormiamo",
+      "voi":  "dormite",
+      "loro": "dormono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "partire",
+    "en": ["to leave", "to depart"],
+    "class": "ire",
+    "irregular": false,
+    "present": {
+      "io":   "parto",
+      "tu":   "parti",
+      "lui":  "parte",
+      "noi":  "partiamo",
+      "voi":  "partite",
+      "loro": "partono"
+    },
+    "tier": 2
+  },
+  {
+    "it": "essere",
+    "en": ["to be"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "sono",
+      "tu":   "sei",
+      "lui":  "è",
+      "noi":  "siamo",
+      "voi":  "siete",
+      "loro": "sono"
+    },
+    "tier": 1,
+    "notes": "io and loro are both 'sono' — context distinguishes them"
+  },
+  {
+    "it": "avere",
+    "en": ["to have"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "ho",
+      "tu":   "hai",
+      "lui":  "ha",
+      "noi":  "abbiamo",
+      "voi":  "avete",
+      "loro": "hanno"
+    },
+    "tier": 1,
+    "notes": "io=ho, tu=hai, lui=ha, loro=hanno — the h is silent, never pronounced"
+  },
+  {
+    "it": "andare",
+    "en": ["to go"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "vado",
+      "tu":   "vai",
+      "lui":  "va",
+      "noi":  "andiamo",
+      "voi":  "andate",
+      "loro": "vanno"
+    },
+    "tier": 1,
+    "notes": "Stem changes in singular and loro (vad-/va-/van-) but noi/voi use the infinitive stem (and-)"
+  },
+  {
+    "it": "fare",
+    "en": ["to do", "to make"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "faccio",
+      "tu":   "fai",
+      "lui":  "fa",
+      "noi":  "facciamo",
+      "voi":  "fate",
+      "loro": "fanno"
+    },
+    "tier": 1
+  },
+  {
+    "it": "dire",
+    "en": ["to say", "to tell"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "dico",
+      "tu":   "dici",
+      "lui":  "dice",
+      "noi":  "diciamo",
+      "voi":  "dite",
+      "loro": "dicono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "venire",
+    "en": ["to come"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "vengo",
+      "tu":   "vieni",
+      "lui":  "viene",
+      "noi":  "veniamo",
+      "voi":  "venite",
+      "loro": "vengono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "sapere",
+    "en": ["to know"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "so",
+      "tu":   "sai",
+      "lui":  "sa",
+      "noi":  "sappiamo",
+      "voi":  "sapete",
+      "loro": "sanno"
+    },
+    "tier": 1
+  },
+  {
+    "it": "potere",
+    "en": ["to be able to", "can"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "posso",
+      "tu":   "puoi",
+      "lui":  "può",
+      "noi":  "possiamo",
+      "voi":  "potete",
+      "loro": "possono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "volere",
+    "en": ["to want"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "voglio",
+      "tu":   "vuoi",
+      "lui":  "vuole",
+      "noi":  "vogliamo",
+      "voi":  "volete",
+      "loro": "vogliono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "stare",
+    "en": ["to stay", "to be"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "sto",
+      "tu":   "stai",
+      "lui":  "sta",
+      "noi":  "stiamo",
+      "voi":  "state",
+      "loro": "stanno"
+    },
+    "tier": 1,
+    "notes": "Used for health/condition ('Come stai?') and continuous tenses (stare + gerundio)"
+  },
+  {
+    "it": "dare",
+    "en": ["to give"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "do",
+      "tu":   "dai",
+      "lui":  "dà",
+      "noi":  "diamo",
+      "voi":  "date",
+      "loro": "danno"
+    },
+    "tier": 1,
+    "notes": "lui=dà (accent distinguishes from preposition 'da')"
+  },
+  {
+    "it": "trovare",
+    "en": ["to find"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "trovo",
+      "tu":   "trovi",
+      "lui":  "trova",
+      "noi":  "troviamo",
+      "voi":  "trovate",
+      "loro": "trovano"
+    },
+    "tier": 1
+  },
+  {
+    "it": "pensare",
+    "en": ["to think"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "penso",
+      "tu":   "pensi",
+      "lui":  "pensa",
+      "noi":  "pensiamo",
+      "voi":  "pensate",
+      "loro": "pensano"
+    },
+    "tier": 1
+  },
+  {
+    "it": "parlare",
+    "en": ["to speak", "to talk"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "parlo",
+      "tu":   "parli",
+      "lui":  "parla",
+      "noi":  "parliamo",
+      "voi":  "parlate",
+      "loro": "parlano"
+    },
+    "tier": 1
+  },
+  {
+    "it": "leggere",
+    "en": ["to read"],
+    "class": "ere",
+    "irregular": false,
+    "present": {
+      "io":   "leggo",
+      "tu":   "leggi",
+      "lui":  "legge",
+      "noi":  "leggiamo",
+      "voi":  "leggete",
+      "loro": "leggono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "prendere",
+    "en": ["to take"],
+    "class": "ere",
+    "irregular": false,
+    "present": {
+      "io":   "prendo",
+      "tu":   "prendi",
+      "lui":  "prende",
+      "noi":  "prendiamo",
+      "voi":  "prendete",
+      "loro": "prendono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "sentire",
+    "en": ["to hear", "to feel"],
+    "class": "ire",
+    "irregular": false,
+    "present": {
+      "io":   "sento",
+      "tu":   "senti",
+      "lui":  "sente",
+      "noi":  "sentiamo",
+      "voi":  "sentite",
+      "loro": "sentono"
+    },
+    "tier": 1
+  },
+  {
+    "it": "imparare",
+    "en": ["to learn"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "imparo",
+      "tu":   "impari",
+      "lui":  "impara",
+      "noi":  "impariamo",
+      "voi":  "imparate",
+      "loro": "imparano"
+    },
+    "tier": 1
+  },
+  {
+    "it": "giocare",
+    "en": ["to play"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "gioco",
+      "tu":   "giochi",
+      "lui":  "gioca",
+      "noi":  "giochiamo",
+      "voi":  "giocate",
+      "loro": "giocano"
+    },
+    "tier": 1,
+    "notes": "-care verb: h inserted before -i to preserve /k/ sound (giochi not *gioci)"
+  },
+  {
+    "it": "guardare",
+    "en": ["to look at", "to watch"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "guardo",
+      "tu":   "guardi",
+      "lui":  "guarda",
+      "noi":  "guardiamo",
+      "voi":  "guardate",
+      "loro": "guardano"
+    },
+    "tier": 2
+  },
+  {
+    "it": "ascoltare",
+    "en": ["to listen"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "ascolto",
+      "tu":   "ascolti",
+      "lui":  "ascolta",
+      "noi":  "ascoltiamo",
+      "voi":  "ascoltate",
+      "loro": "ascoltano"
+    },
+    "tier": 2
+  },
+  {
+    "it": "amare",
+    "en": ["to love"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "amo",
+      "tu":   "ami",
+      "lui":  "ama",
+      "noi":  "amiamo",
+      "voi":  "amate",
+      "loro": "amano"
+    },
+    "tier": 2
+  },
+  {
+    "it": "lavorare",
+    "en": ["to work"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "lavoro",
+      "tu":   "lavori",
+      "lui":  "lavora",
+      "noi":  "lavoriamo",
+      "voi":  "lavorate",
+      "loro": "lavorano"
+    },
+    "tier": 2
+  },
+  {
+    "it": "comprare",
+    "en": ["to buy"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "compro",
+      "tu":   "compri",
+      "lui":  "compra",
+      "noi":  "compriamo",
+      "voi":  "comprate",
+      "loro": "comprano"
+    },
+    "tier": 2
+  },
+  {
+    "it": "abitare",
+    "en": ["to live", "to reside"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "abito",
+      "tu":   "abiti",
+      "lui":  "abita",
+      "noi":  "abitiamo",
+      "voi":  "abitate",
+      "loro": "abitano"
+    },
+    "tier": 2
+  },
+  {
+    "it": "conoscere",
+    "en": ["to know a person", "to be acquainted with"],
+    "class": "ere",
+    "irregular": false,
+    "present": {
+      "io":   "conosco",
+      "tu":   "conosci",
+      "lui":  "conosce",
+      "noi":  "conosciamo",
+      "voi":  "conoscete",
+      "loro": "conoscono"
+    },
+    "tier": 2
+  },
+  {
+    "it": "capire",
+    "en": ["to understand"],
+    "class": "ire_isc",
+    "irregular": false,
+    "present": {
+      "io":   "capisco",
+      "tu":   "capisci",
+      "lui":  "capisce",
+      "noi":  "capiamo",
+      "voi":  "capite",
+      "loro": "capiscono"
+    },
+    "tier": 2
+  },
+  {
+    "it": "finire",
+    "en": ["to finish"],
+    "class": "ire_isc",
+    "irregular": false,
+    "present": {
+      "io":   "finisco",
+      "tu":   "finisci",
+      "lui":  "finisce",
+      "noi":  "finiamo",
+      "voi":  "finite",
+      "loro": "finiscono"
+    },
+    "tier": 2
+  },
+  {
+    "it": "aprire",
+    "en": ["to open"],
+    "class": "ire",
+    "irregular": false,
+    "present": {
+      "io":   "apro",
+      "tu":   "apri",
+      "lui":  "apre",
+      "noi":  "apriamo",
+      "voi":  "aprite",
+      "loro": "aprono"
+    },
+    "tier": 2
+  },
+  {
+    "it": "uscire",
+    "en": ["to go out"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "esco",
+      "tu":   "esci",
+      "lui":  "esce",
+      "noi":  "usciamo",
+      "voi":  "uscite",
+      "loro": "escono"
+    },
+    "tier": 2
+  },
+  {
+    "it": "cantare",
+    "en": ["to sing"],
+    "class": "are",
+    "irregular": false,
+    "present": {
+      "io":   "canto",
+      "tu":   "canti",
+      "lui":  "canta",
+      "noi":  "cantiamo",
+      "voi":  "cantate",
+      "loro": "cantano"
+    },
+    "tier": 2
+  },
+  {
+    "it": "dovere",
+    "en": ["to have to", "must"],
+    "class": "irregular",
+    "irregular": true,
+    "present": {
+      "io":   "devo",
+      "tu":   "devi",
+      "lui":  "deve",
+      "noi":  "dobbiamo",
+      "voi":  "dovete",
+      "loro": "devono"
+    },
+    "tier": 1,
+    "notes": "Modal verb — followed by infinitive. Formal/literary alternatives: debbo (io), debbono (loro)."
+  }
+]
