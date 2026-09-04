@@ -17,6 +17,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         '':      'application/octet-stream',
     }
 
+    def end_headers(self):
+        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+        super().end_headers()
+
     def log_message(self, fmt, *args):
         pass  # suppress request noise
 
