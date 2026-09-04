@@ -395,7 +395,8 @@
     "article_class": "standard",
     "tier": 2,
     "notes": "Irregular plural mogli (not *mogle)",
-    "animate": true
+    "animate": true,
+    "nuclear_family": true
   },
   {
     "it": "marito",
@@ -406,7 +407,8 @@
     "plural": "mariti",
     "article_class": "standard",
     "tier": 2,
-    "animate": true
+    "animate": true,
+    "nuclear_family": true
   },
   {
     "it": "sorella",
@@ -417,7 +419,8 @@
     "plural": "sorelle",
     "article_class": "standard",
     "tier": 1,
-    "animate": true
+    "animate": true,
+    "nuclear_family": true
   },
   {
     "it": "fratello",
@@ -428,7 +431,8 @@
     "plural": "fratelli",
     "article_class": "standard",
     "tier": 1,
-    "animate": true
+    "animate": true,
+    "nuclear_family": true
   },
   {
     "it": "cavallo",
@@ -553,7 +557,8 @@
     "plural": "madri",
     "article_class": "standard",
     "tier": 1,
-    "animate": true
+    "animate": true,
+    "nuclear_family": true
   },
   {
     "it": "padre",
@@ -564,7 +569,8 @@
     "plural": "padri",
     "article_class": "standard",
     "tier": 1,
-    "animate": true
+    "animate": true,
+    "nuclear_family": true
   },
   {
     "it": "famiglia",

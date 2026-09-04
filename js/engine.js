@@ -251,22 +251,35 @@ function buildNounPred(noun, adj, number, adjIndex) {
 }
 
 // "My dog is sick" | "My (female) dog is tired" -> "Il mio cane e malato" | "La mia cagna e stanca"
+// Nuclear family nouns (madre, padre, moglie…) drop the article in singular:
+//   "Mia moglie è stanca" not "La mia moglie è stanca"
+//   Plural still uses the article: "Le mie sorelle sono stanche"
 function buildPossNounPred(noun, adj, number, owner = 'io', adjIndex) {
-    const possArt  = possessiveArticle(noun, number);
+    const nuclear  = noun.nuclear_family && number === 'singular';
     const poss     = possessiveAdj(owner, noun.gender, number);
     const nounIt   = nounForm(noun, number);
     const adjIt    = adjForm(adj, noun.gender, number);
     const essereFm = essereForm(number);
     const pronoun  = number === 'singular' ? 'lui/lei' : 'loro';
     const ownerEn  = POSSESSIVES[owner]?.en ?? 'My';
+    const possCtx  = { gender: noun.gender, number, noun: nounIt };
+    const nounCtx  = { gender: noun.gender, number, singular: noun.it };
 
-    const tokens = [
-        { token: capitalize(possArt), role: 'article',    ruleId: 'possessive_article', context: { gender: noun.gender, number, noun: nounIt } },
-        { token: poss,                role: 'possessive', ruleId: 'possessive_article', context: { gender: noun.gender, number, noun: nounIt } },
-        { token: nounIt,              role: 'noun',       ruleId: number === 'plural' ? 'noun_plural' : null, context: { gender: noun.gender, number, singular: noun.it } },
-        verbToken(essereFm, 'essere', pronoun),
-        adjToken(adjIt, adj, noun, number, adjIndex),
-    ];
+    const tokens = nuclear
+        ? [
+            // No article: "Mia moglie è stanca"
+            { token: capitalize(poss), role: 'possessive', ruleId: 'possessive_nuclear', context: possCtx },
+            { token: nounIt,           role: 'noun',       ruleId: null,                context: nounCtx },
+            verbToken(essereFm, 'essere', pronoun),
+            adjToken(adjIt, adj, noun, number, adjIndex),
+          ]
+        : [
+            { token: capitalize(possessiveArticle(noun, number)), role: 'article',    ruleId: 'possessive_article', context: possCtx },
+            { token: poss,                                         role: 'possessive', ruleId: 'possessive_article', context: possCtx },
+            { token: nounIt,                                       role: 'noun',       ruleId: number === 'plural' ? 'noun_plural' : null, context: nounCtx },
+            verbToken(essereFm, 'essere', pronoun),
+            adjToken(adjIt, adj, noun, number, adjIndex),
+          ];
 
     const answer = tokens.map(t => t.token).join(' ');
 
