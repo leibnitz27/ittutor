@@ -5,8 +5,8 @@ A personal web-based Italian language tutor to supplement DL (Duolingo). Non-com
 Goal: minimally conversational Italian, drilling genuine recall (blank input, no word banks).
 
 ## Status
-**Phase 4 complete — working app.**
-Phases 1–4 and data expansion done. Next: Phase 5 (mutation system).
+**Phase 5 complete + significant bugfixes and UX improvements.**
+Next: fix 2-form adjective error messages and explanations (adj_2form ruleId).
 
 ## Tech Stack
 - Plain JavaScript ES modules — no build step, runs directly in browser
@@ -45,8 +45,10 @@ ittutor/
 - [x] Phase 3 — engine.js (generation, no mutation yet)
 - [x] Phase 4 — UI shell (index.html, app.js, ui.js, css/app.css)
 - [x] Phase 8 — Data expansion (done early: 109 nouns, 53 adj, 39 verbs)
-- [ ] Phase 5 — Mutation system
+- [x] Phase 5 — Mutation system
 - [ ] Phase 6 — Explainer (rules.json expansion + explainer.js)
+  - Next up: adj_2form ruleId — 2-form adjectives need separate rule, error message, and explanation
+    (current adj_gender_agreement message misleadingly implies gender change when form is invariant)
 - [ ] Phase 7 — Steering UI
 
 ## UI Features (Phase 4)
@@ -74,7 +76,14 @@ ittutor/
   — masculine: soprano
 - Elided articles fused with noun into one token (l'amica = single token, role: article_noun)
 - Possessive constructions always use standard article (il/la/i/le), not lo/l'
-- Synonyms: engine pre-computes accepted[] on adjective tokens; checker accepts any synonym form
+- Synonyms: engine pre-computes accepted[] and acceptedBases[] on adjective tokens; checker accepts
+  any synonym form and reports errors against the closest synonym (Levenshtein distance)
+- Gender hint: hint box shows noun + adjective base forms; secondary "show gender" link (right-aligned)
+  reveals (feminine)/(masculine) on demand
+- Mutation system: after correct answer, next exercise varies one dimension (number, adjective, noun,
+  gender_swap, definiteness, owner, template); wrong answer or skip breaks the chain
+- No-cache headers on dev server (scripts/serve.py) — normal refresh always gets fresh files
+- Test files: test_checker.html, test_engine.html — run in browser at localhost:8000
 
 ## Data Schema Notes
 - nouns.json fields: it, en, en_base?, gender, plural, article_class, tier,
