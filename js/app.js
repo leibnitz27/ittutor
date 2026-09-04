@@ -70,6 +70,7 @@ function handleCheck() {
     if (state.checked) return;
 
     const input  = ui.getInput();
+    if (!input.trim()) return;
     const result = check(input, state.exercise);
     state.checked = true;
 
