@@ -16,12 +16,18 @@ function capitalize(str) {
 }
 
 // Simple English pluraliser -- good enough for our vocabulary set
-const EN_IRREGULAR = { 'man': 'men', 'woman': 'women' };
+const EN_IRREGULAR = {
+    'man': 'men', 'woman': 'women',
+    'child': 'children',
+    'person': 'people',
+    'fish': 'fish',       // invariable
+};
 
 function enPlural(word) {
     if (EN_IRREGULAR[word]) return EN_IRREGULAR[word];
+    if (word.endsWith('fe')) return word.slice(0, -2) + 'ves';  // wife → wives, life → lives
     if (word.endsWith('y') && !'aeiou'.includes(word[word.length - 2]))
-        return word.slice(0, -1) + 'ies';  // city -> cities
+        return word.slice(0, -1) + 'ies';  // city → cities
     if (/(?:s|sh|ch|x|z)$/.test(word)) return word + 'es';
     return word + 's';
 }
