@@ -149,8 +149,10 @@ export function check(userInput, exercise) {
         const acceptedStripped = accepted.map(stripAccents);
 
         if (accepted.includes(got)) {
+            const matchIdx  = accepted.indexOf(got);
+            const matchForm = (at.accepted ?? [at.token])[matchIdx];
             return {
-                expected: at.token, got,
+                expected: matchForm, got,
                 correct: true, accentOnly: false,
                 role: at.role, ruleId: at.ruleId,
                 message: null

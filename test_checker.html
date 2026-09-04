@@ -175,10 +175,16 @@ const tests = [
                 expect: { correct: true, accentOnly: false },
             },
             {
-                label: "Synonym correct: divertenti accepted",
+                label: "Synonym correct: divertenti accepted — expected shows divertenti not buffe",
                 input: "Le teste sono divertenti",
                 exercise: testeExercise,
                 expect: { correct: true, accentOnly: false },
+                expectTokens: [
+                    { correct: true },
+                    { correct: true },
+                    { correct: true },
+                    { correct: true, expected: "divertenti" },
+                ]
             },
             {
                 label: "Wrong synonym form: divertente → error references divertenti not buffo",
