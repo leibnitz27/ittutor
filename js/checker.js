@@ -29,6 +29,29 @@ const ACCENT_WORD_PAIRS = {
     'ne': { accented: 'né', note: "'ne' is a particle -- 'né' (with accent) means 'neither/nor'" },
 };
 
+function levenshtein(a, b) {
+    const m = a.length, n = b.length;
+    const dp = Array.from({ length: m + 1 }, (_, i) => [i, ...Array(n).fill(0)]);
+    for (let j = 0; j <= n; j++) dp[0][j] = j;
+    for (let i = 1; i <= m; i++)
+        for (let j = 1; j <= n; j++)
+            dp[i][j] = a[i-1] === b[j-1]
+                ? dp[i-1][j-1]
+                : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+    return dp[m][n];
+}
+
+// Find the index of the accepted form closest to got by edit distance.
+// Used to identify which synonym the user was attempting when they got the form wrong.
+function closestAcceptedIdx(got, accepted) {
+    let bestDist = Infinity, bestIdx = 0;
+    for (let i = 0; i < accepted.length; i++) {
+        const dist = levenshtein(got, accepted[i]);
+        if (dist < bestDist) { bestDist = dist; bestIdx = i; }
+    }
+    return bestIdx;
+}
+
 function accentMessage(got, expected) {
     const pair = ACCENT_WORD_PAIRS[got];
     if (pair && pair.accented === expected) return pair.note;
@@ -146,11 +169,19 @@ export function check(userInput, exercise) {
             };
         }
 
+        // If the user attempted a synonym, report the error against that form/base.
+        const closestIdx  = closestAcceptedIdx(got, accepted);
+        const intendedForm = accepted[closestIdx];
+        const intendedBase = at.acceptedBases?.[closestIdx] ?? at.context?.baseForm;
+        const errorCtx    = intendedBase !== at.context?.baseForm
+            ? { ...at.context, baseForm: intendedBase }
+            : at.context;
+
         return {
-            expected: at.token, got,
+            expected: intendedForm, got,
             correct: false, accentOnly: false,
             role: at.role, ruleId: at.ruleId,
-            message: shortMessage(got, at.token, at.role, at.context)
+            message: shortMessage(got, intendedForm, at.role, errorCtx)
         };
     });
 

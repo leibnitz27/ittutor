@@ -148,14 +148,19 @@ function articleNounTokens(article, nounIt, noun, number, definiteness) {
 }
 
 // Pre-compute all accepted forms for an adjective slot, including synonyms.
-// Stored on the token so the checker can accept any of them.
+// Returns parallel arrays: forms[] and bases[] (base adjective it for each form).
+// Stored on the token so the checker can report against whichever form was attempted.
 function computeAccepted(adj, gender, number, adjIndex) {
     const forms = [adjForm(adj, gender, number)];
+    const bases = [adj.it];
     for (const synIt of (adj.synonyms ?? [])) {
         const syn = adjIndex?.[synIt];
-        if (syn) forms.push(adjForm(syn, gender, number));
+        if (syn) {
+            forms.push(adjForm(syn, gender, number));
+            bases.push(syn.it);
+        }
     }
-    return forms;
+    return { forms, bases };
 }
 
 function adjToken(adjIt, adj, noun, number, adjIndex) {
@@ -163,12 +168,15 @@ function adjToken(adjIt, adj, noun, number, adjIndex) {
         : number === 'plural' ? 'adj_number_agreement'
         : 'adj_gender_agreement';
 
+    const { forms, bases } = computeAccepted(adj, noun.gender, number, adjIndex);
+
     return {
-        token:    adjIt,
-        role:     'adjective',
+        token:         adjIt,
+        role:          'adjective',
         ruleId,
-        accepted: computeAccepted(adj, noun.gender, number, adjIndex),
-        context:  { gender: noun.gender, number, noun: nounForm(noun, number), baseForm: adj.it }
+        accepted:      forms,
+        acceptedBases: bases,
+        context:       { gender: noun.gender, number, noun: nounForm(noun, number), baseForm: adj.it }
     };
 }
 
