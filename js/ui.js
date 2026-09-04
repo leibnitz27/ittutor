@@ -172,26 +172,28 @@ function toggleHint() {
 function buildHint(exercise) {
     if (!exercise) return '';
     const { noun, adjective } = exercise.components;
-    const rows = [];
+    const parts = [];
 
     if (noun) {
         const en     = noun.en_base ?? noun.en[0];
         const gender = noun.gender === 'f' ? 'feminine' : 'masculine';
-        rows.push(
-            `<strong>${escHtml(en)}</strong> = ${escHtml(noun.it)}<br>` +
-            `<span class="ms-3">` +
+        parts.push(
+            `<div class="d-flex justify-content-between align-items-baseline">` +
+            `<span><strong>${escHtml(en)}</strong> = ${escHtml(noun.it)}</span>` +
+            `<span>` +
             `<span id="hint-gender" class="d-none text-muted small">(${gender})</span>` +
-            `<a href="#" id="hint-gender-btn" class="small text-muted" style="text-decoration:none"` +
-            ` onclick="document.getElementById('hint-gender').classList.remove('d-none');this.remove();return false;">gender?</a>` +
-            `</span>`
+            `<a href="#" id="hint-gender-btn" class="ms-2 small"` +
+            ` onclick="document.getElementById('hint-gender').classList.remove('d-none');this.remove();return false;">show gender</a>` +
+            `</span>` +
+            `</div>`
         );
     }
     if (adjective) {
-        rows.push(`<strong>${escHtml(adjective.en[0])}</strong> = ${escHtml(adjective.it)}`);
+        parts.push(`<div><strong>${escHtml(adjective.en[0])}</strong> = ${escHtml(adjective.it)}</div>`);
     }
 
-    return rows.length
-        ? rows.join('<br>')
+    return parts.length
+        ? parts.join('')
         : '<em class="text-muted">No vocabulary hints for this exercise.</em>';
 }
 
