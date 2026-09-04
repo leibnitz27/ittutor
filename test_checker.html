@@ -68,6 +68,22 @@ const testeExercise = {
     ]
 };
 
+// ── "My card is heavy" → "La mia carta è pesante" (2-form adjective) ─────────
+
+const cartaExercise = {
+    answer: "La mia carta è pesante",
+    answerTokens: [
+        { token: "La",      role: "article",    ruleId: "article_definite",   context: { gender: "f", number: "singular", noun: "carta" } },
+        { token: "mia",     role: "possessive", ruleId: "possessive_article", context: { gender: "f", number: "singular", noun: "carta" } },
+        { token: "carta",   role: "noun",       ruleId: null,                 context: { gender: "f", number: "singular", singular: "carta" } },
+        { token: "è",       role: "verb",       ruleId: null,                 context: { verb: "essere", pronoun: "lui/lei" } },
+        { token: "pesante", role: "adjective",  ruleId: "adj_2form",
+          accepted: ["pesante"],
+          acceptedBases: ["pesante"],
+          context: { gender: "f", number: "singular", noun: "carta", baseForm: "pesante", agreement: "2form" } }
+    ]
+};
+
 // ── "The blue rucksacks" → "Gli zaini blu" ───────────────────────────────────
 
 const zainiExercise = {
@@ -208,6 +224,30 @@ const tests = [
                     { correct: true  },
                     { correct: true  },
                     { correct: false, expected: "buffe" },
+                ]
+            },
+        ]
+    },
+    {
+        suite: "2-form adjective error messages (La mia carta è pesante)",
+        cases: [
+            {
+                label: "Correct answer",
+                input: "La mia carta è pesante",
+                exercise: cartaExercise,
+                expect: { correct: true, accentOnly: false },
+            },
+            {
+                label: "Wrong: pesanta — message says same form for both genders",
+                input: "La mia carta è pesanta",
+                exercise: cartaExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: true },
+                    { correct: true },
+                    { correct: true },
+                    { correct: true },
+                    { correct: false, message: "same form for masculine and feminine" },
                 ]
             },
         ]

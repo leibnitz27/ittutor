@@ -80,6 +80,8 @@ function shortMessage(got, expected, role, context) {
 
         case 'adjective': {
             const baseAdj = context?.baseForm ?? '';
+            if (context?.agreement === '2form')
+                return `'${baseAdj}' has the same form for masculine and feminine -- use '${expected}'`;
             if (genderWord && number)
                 return `'${baseAdj}' must agree: ${noun ? `'${noun}' is ` : ''}${genderWord} ${numberWord} -- use '${expected}'`;
             return `Adjective form wrong -- use '${expected}', not '${got}'`;

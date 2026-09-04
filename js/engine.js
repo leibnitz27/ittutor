@@ -165,7 +165,8 @@ function computeAccepted(adj, gender, number, adjIndex) {
 
 function adjToken(adjIt, adj, noun, number, adjIndex) {
     const ruleId = adj.agreement === 'invariable' ? 'adj_invariable'
-        : number === 'plural' ? 'adj_number_agreement'
+        : adj.agreement === '2form'               ? 'adj_2form'
+        : number === 'plural'                     ? 'adj_number_agreement'
         : 'adj_gender_agreement';
 
     const { forms, bases } = computeAccepted(adj, noun.gender, number, adjIndex);
@@ -176,7 +177,7 @@ function adjToken(adjIt, adj, noun, number, adjIndex) {
         ruleId,
         accepted:      forms,
         acceptedBases: bases,
-        context:       { gender: noun.gender, number, noun: nounForm(noun, number), baseForm: adj.it }
+        context:       { gender: noun.gender, number, noun: nounForm(noun, number), baseForm: adj.it, agreement: adj.agreement }
     };
 }
 

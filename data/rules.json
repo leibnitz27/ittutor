@@ -11,6 +11,18 @@
     ]
   },
   {
+    "id": "adj_2form",
+    "title": "2-form adjectives — gender doesn't change the ending",
+    "explanation": "Some Italian adjectives have the same form for masculine and feminine. Only number changes: singular ends in -e, plural ends in -i. Do not add -a for feminine — the singular form is the same for both genders.",
+    "examples": [
+      { "it": "il gatto pesante", "en": "the heavy cat (masculine singular)" },
+      { "it": "la borsa pesante", "en": "the heavy bag (feminine singular — same form)" },
+      { "it": "i gatti pesanti", "en": "the heavy cats (masculine plural)" },
+      { "it": "le borse pesanti", "en": "the heavy bags (feminine plural — same form)" },
+      { "it": "il mare tranquillo / la città tranquilla", "en": "tranquillo is 4-form (changes); tranquille is 2-form (doesn't)" }
+    ]
+  },
+  {
     "id": "adj_number_agreement",
     "title": "Adjective number agreement",
     "explanation": "Italian adjectives must agree with the noun they describe in number. Singular nouns take singular adjective endings, plural nouns take plural endings. For 4-form adjectives: masculine plural ends in -i (rossi), feminine plural ends in -e (rosse). For 2-form adjectives: plural ends in -i regardless of gender (tristi).",
