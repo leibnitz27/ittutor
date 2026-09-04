@@ -215,7 +215,8 @@
     "gender": "f",
     "plural": "estati",
     "article_class": "vowel",
-    "tier": 2
+    "tier": 2,
+    "singular_only": true
   },
   {
     "it": "amica",
@@ -329,7 +330,8 @@
     "gender": "m",
     "plural": "frutti",
     "article_class": "standard",
-    "tier": 2
+    "tier": 2,
+    "singular_only": true
   },
   {
     "it": "verdura",
