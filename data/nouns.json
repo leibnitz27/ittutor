@@ -988,12 +988,12 @@
     "tier": 2
   },
   {
-    "it": "muro",
+    "it": "parete",
     "en": [
       "wall"
     ],
-    "gender": "m",
-    "plural": "muri",
+    "gender": "f",
+    "plural": "pareti",
     "article_class": "standard",
     "tier": 2
   },
