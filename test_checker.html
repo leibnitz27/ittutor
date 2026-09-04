@@ -54,6 +54,20 @@ const gattiExercise = {
     ]
 };
 
+// ── "The heads are amusing" → "Le teste sono buffe" (synonym: divertenti) ────
+
+const testeExercise = {
+    answer: "Le teste sono buffe",
+    answerTokens: [
+        { token: "Le",    role: "article",   ruleId: "article_definite",     context: { gender: "f", number: "plural",   noun: "teste" } },
+        { token: "teste", role: "noun",      ruleId: "noun_plural",          context: { gender: "f", number: "plural",   singular: "testa" } },
+        { token: "sono",  role: "verb",      ruleId: null,                   context: { verb: "essere", pronoun: "loro" } },
+        { token: "buffe", role: "adjective", ruleId: "adj_number_agreement",
+          accepted: ["buffe", "divertenti"], acceptedBases: ["buffo", "divertente"],
+          context: { gender: "f", number: "plural", noun: "teste", baseForm: "buffo" } }
+    ]
+};
+
 // ── "The blue rucksacks" → "Gli zaini blu" ───────────────────────────────────
 
 const zainiExercise = {
@@ -152,6 +166,47 @@ const tests = [
         ]
     },
     {
+        suite: "Synonym error messages (Le teste sono buffe / divertenti)",
+        cases: [
+            {
+                label: "Primary form correct",
+                input: "Le teste sono buffe",
+                exercise: testeExercise,
+                expect: { correct: true, accentOnly: false },
+            },
+            {
+                label: "Synonym correct: divertenti accepted",
+                input: "Le teste sono divertenti",
+                exercise: testeExercise,
+                expect: { correct: true, accentOnly: false },
+            },
+            {
+                label: "Wrong synonym form: divertente → error references divertenti not buffo",
+                input: "Le teste sono divertente",
+                exercise: testeExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: true  },
+                    { correct: true  },
+                    { correct: true  },
+                    { correct: false, expected: "divertenti", message: "divertenti" },
+                ]
+            },
+            {
+                label: "Completely wrong adjective: error references primary form",
+                input: "Le teste sono grandi",
+                exercise: testeExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: true  },
+                    { correct: true  },
+                    { correct: true  },
+                    { correct: false, expected: "buffe" },
+                ]
+            },
+        ]
+    },
+    {
         suite: "Gli zaini blu",
         cases: [
             {
@@ -205,6 +260,8 @@ for (const suite of tests) {
                     const t = result.tokens[i];
                     if ('correct'    in et) assert(t.correct    === et.correct,    `token[${i}].correct: expected ${et.correct}, got ${t.correct}`);
                     if ('accentOnly' in et) assert(t.accentOnly === et.accentOnly, `token[${i}].accentOnly: expected ${et.accentOnly}, got ${t.accentOnly}`);
+                    if ('expected'   in et) assert(t.expected   === et.expected,   `token[${i}].expected: expected "${et.expected}", got "${t.expected}"`);
+                    if ('message'    in et) assert(t.message?.includes(et.message), `token[${i}].message: expected to include "${et.message}", got "${t.message}"`);
                 });
             }
         } catch (e) {
