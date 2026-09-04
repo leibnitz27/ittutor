@@ -95,6 +95,13 @@ function shortMessage(got, expected, role, context) {
         case 'noun':
             if (number === 'plural')
                 return `Plural of '${context?.singular ?? got}' is '${expected}', not '${got}'`;
+            if (genderWord) {
+                if (expected.endsWith('e') && got.endsWith('a'))
+                    return `'${expected}' is ${genderWord} but ends in -e, not -a`;
+                if (expected.endsWith('e') && got.endsWith('o'))
+                    return `'${expected}' is ${genderWord} but ends in -e, not -o`;
+                return `'${expected}' is ${genderWord} — use '${expected}', not '${got}'`;
+            }
             return `Use '${expected}', not '${got}'`;
 
         default:

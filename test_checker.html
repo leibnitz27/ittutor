@@ -229,6 +229,24 @@ const tests = [
         ]
     },
     {
+        suite: "Singular noun error messages",
+        cases: [
+            {
+                label: "Feminine -e noun: parta → parte — explains ends in -e not -a",
+                input: "La mia parta è pesante",
+                exercise: cartaExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: true },
+                    { correct: true },
+                    { correct: false, message: "ends in -e, not -a" },
+                    { correct: true },
+                    { correct: true },
+                ]
+            },
+        ]
+    },
+    {
         suite: "2-form adjective error messages (La mia carta è pesante)",
         cases: [
             {
