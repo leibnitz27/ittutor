@@ -10,6 +10,8 @@ export function init({ onCheck, onNext, onTierChange, onSkip }) {
         else onCheck();
     });
 
+    el('answer-input').addEventListener('input', syncCheckBtn);
+
     el('answer-input').addEventListener('keydown', e => {
         if (e.key !== 'Enter') return;
         if (el('check-btn').dataset.mode === 'next') onNext();
@@ -35,12 +37,19 @@ export function init({ onCheck, onNext, onTierChange, onSkip }) {
 
 // ── Accent insertion ───────────────────────────────────────────────────────
 
+function syncCheckBtn() {
+    const btn = el('check-btn');
+    if (btn.dataset.mode === 'next') return;
+    btn.disabled = !el('answer-input').value.trim();
+}
+
 function insertAccent(ch) {
     const input = el('answer-input');
     const start = input.selectionStart ?? input.value.length;
     const end   = input.selectionEnd   ?? input.value.length;
     input.setRangeText(ch, start, end, 'end');
     input.focus();
+    syncCheckBtn();
 }
 
 // ── Exercise display ───────────────────────────────────────────────────────
@@ -65,6 +74,7 @@ export function showExercise(exercise) {
     el('check-btn').textContent    = 'Check';
     el('check-btn').dataset.mode   = 'check';
     el('check-btn').className      = 'btn btn-primary px-4';
+    el('check-btn').disabled       = true;
     el('feedback').innerHTML       = '';
     el('hint-panel').classList.add('d-none');
     el('explainer').classList.add('d-none');
@@ -85,6 +95,7 @@ function lockInput(valid) {
     el('check-btn').textContent  = 'Next →';
     el('check-btn').dataset.mode = 'next';
     el('check-btn').className    = 'btn btn-outline-secondary px-4';
+    el('check-btn').disabled     = false;
 }
 
 export function showCorrect(result, exercise) {
