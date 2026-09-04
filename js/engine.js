@@ -314,6 +314,49 @@ function buildPossNounPred(noun, adj, number, owner = 'io', adjIndex) {
     };
 }
 
+// ── Mutation helpers ──────────────────────────────────────────────────────────
+
+function buildSameTemplate(exercise, data, overrides) {
+    const { noun, adjective, number, definiteness, possessive } = exercise.components;
+    const n   = overrides.noun         ?? noun;
+    const adj = overrides.adjective    ?? adjective;
+    const num = overrides.number       ?? number;
+    const def = overrides.definiteness ?? definiteness;
+    const own = overrides.possessive   ?? possessive ?? 'io';
+
+    switch (exercise.template) {
+        case 'nounAdj':
+            return buildNounAdj(n, adj, num, num === 'plural' ? 'definite' : def, data.adjIndex);
+        case 'nounPred':
+            return buildNounPred(n, adj, num, data.adjIndex);
+        case 'possNounPred':
+            return buildPossNounPred(n, adj, num, own, data.adjIndex);
+        default:
+            return buildNounPred(n, adj, num, data.adjIndex);
+    }
+}
+
+const MUTATION_WEIGHTS = {
+    number: 3, adjective: 3, noun: 3, gender_swap: 2, definiteness: 1, owner: 1, template: 1,
+};
+
+function pickMutation(exercise, lastMutation) {
+    const { noun, number } = exercise.components;
+    const template = exercise.template;
+    const candidates = [];
+
+    for (const [dim, weight] of Object.entries(MUTATION_WEIGHTS)) {
+        if (dim === lastMutation) continue;
+        if (dim === 'definiteness' && (template !== 'nounAdj' || number === 'plural')) continue;
+        if (dim === 'owner'        && template !== 'possNounPred') continue;
+        if (dim === 'gender_swap'  && !noun.feminine && !noun.masculine) continue;
+        if (dim === 'number'       && noun.singular_only) continue;
+        for (let i = 0; i < weight; i++) candidates.push(dim);
+    }
+
+    return candidates.length ? pick(candidates) : 'adjective';
+}
+
 // ── Main export ───────────────────────────────────────────────────────────────
 
 const TEMPLATES = ['nounAdj', 'nounPred', 'possNounPred'];
@@ -361,5 +404,77 @@ export function generateExercise(data, options = {}) {
     }
 }
 
-// Exported for use by the mutation engine (Phase 5)
+// mutateDimension(exercise, data, dimension, options) → new exercise | null
+export function mutateDimension(exercise, data, dimension, options = {}) {
+    const { noun, adjective, number, definiteness, possessive } = exercise.components;
+    const tier = options.tier ?? 3;
+
+    switch (dimension) {
+        case 'number': {
+            const newNum = number === 'singular' ? 'plural' : 'singular';
+            if (noun.singular_only && newNum === 'plural') return null;
+            return buildSameTemplate(exercise, data, { number: newNum });
+        }
+        case 'definiteness': {
+            if (exercise.template !== 'nounAdj' || number === 'plural') return null;
+            return buildNounAdj(noun, adjective, 'singular',
+                definiteness === 'definite' ? 'indefinite' : 'definite', data.adjIndex);
+        }
+        case 'adjective': {
+            const pool = byTier(data.adjectives, tier)
+                .filter(a => a.it !== adjective.it && (!a.animate_only || noun.animate));
+            if (!pool.length) return null;
+            return buildSameTemplate(exercise, data, { adjective: pick(pool) });
+        }
+        case 'noun': {
+            const npool = byTier(data.nouns, tier).filter(n => n.it !== noun.it);
+            if (!npool.length) return null;
+            const newNoun = pick(npool);
+            const safeAdj = (!adjective.animate_only || newNoun.animate)
+                ? adjective
+                : pick(byTier(data.adjectives, tier).filter(a => !a.animate_only));
+            return buildSameTemplate(exercise, data, { noun: newNoun, adjective: safeAdj });
+        }
+        case 'gender_swap': {
+            const partner = noun.feminine
+                ? data.nounIndex[noun.feminine]
+                : noun.masculine ? data.nounIndex[noun.masculine] : null;
+            if (!partner) return null;
+            return buildSameTemplate(exercise, data, { noun: partner });
+        }
+        case 'owner': {
+            if (exercise.template !== 'possNounPred') return null;
+            const newOwner = (possessive ?? 'io') === 'io' ? 'tu' : 'io';
+            return buildPossNounPred(noun, adjective, number, newOwner, data.adjIndex);
+        }
+        case 'template': {
+            const others = TEMPLATES.filter(t => t !== exercise.template);
+            const newTemplate = pick(others);
+            const own = possessive ?? 'io';
+            switch (newTemplate) {
+                case 'nounAdj':
+                    return buildNounAdj(noun, adjective, number,
+                        number === 'plural' ? 'definite' : (definiteness ?? 'definite'), data.adjIndex);
+                case 'nounPred':
+                    return buildNounPred(noun, adjective, number, data.adjIndex);
+                case 'possNounPred':
+                    return buildPossNounPred(noun, adjective, number, own, data.adjIndex);
+            }
+            break;
+        }
+    }
+    return null;
+}
+
+// generateNext(exercise, data, options) → next exercise via mutation, or fresh fallback
+export function generateNext(exercise, data, options = {}) {
+    const dimension = pickMutation(exercise, options.lastMutation ?? null);
+    const mutated   = mutateDimension(exercise, data, dimension, options);
+    if (mutated) {
+        mutated._mutation = dimension;
+        return mutated;
+    }
+    return generateExercise(data, options);
+}
+
 export { buildNounAdj, buildNounPred, buildPossNounPred, definiteArticle, indefiniteArticle, possessiveArticle, nounForm, adjForm, essereForm, possessiveAdj, genderHint, POSSESSIVES };

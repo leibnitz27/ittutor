@@ -1,19 +1,21 @@
 // app.js -- entry point: wires data, engine, checker, and UI together.
 
 import { getData }         from './data.js';
-import { generateExercise } from './engine.js';
+import { generateExercise, generateNext } from './engine.js';
 import { check }           from './checker.js';
 import * as ui             from './ui.js';
 
 // ── State ──────────────────────────────────────────────────────────────────
 
 const state = {
-    data:       null,
-    exercise:   null,
-    checked:    false,
-    streak:     0,
-    retryQueue: [],   // [{ exercise, delay }]  delay = successes needed before reinsertion
-    tier:       3,
+    data:         null,
+    exercise:     null,
+    checked:      false,
+    streak:       0,
+    retryQueue:   [],   // [{ exercise, delay }]  delay = successes needed before reinsertion
+    tier:         3,
+    lastCorrect:  null, // last correctly-answered exercise (source for next mutation)
+    lastMutation: null, // dimension used in last mutation (to avoid immediate repetition)
 };
 
 // ── Retry queue ────────────────────────────────────────────────────────────
@@ -37,11 +39,26 @@ function dequeueReady() {
 // ── Exercise loop ──────────────────────────────────────────────────────────
 
 function nextExercise() {
-    const retry   = dequeueReady();
-    const exercise = retry ?? generateExercise(state.data, { tier: state.tier });
+    const retry = dequeueReady();
+    let exercise;
 
-    state.exercise = exercise;
-    state.checked  = false;
+    if (retry) {
+        exercise = retry;
+        state.lastMutation = null;
+    } else if (state.lastCorrect) {
+        exercise = generateNext(state.lastCorrect, state.data, {
+            tier: state.tier,
+            lastMutation: state.lastMutation,
+        });
+        state.lastMutation = exercise._mutation ?? null;
+    } else {
+        exercise = generateExercise(state.data, { tier: state.tier });
+        state.lastMutation = null;
+    }
+
+    state.lastCorrect = null;
+    state.exercise    = exercise;
+    state.checked     = false;
 
     ui.setExplainerContext(exercise, state.data.ruleIndex);
     ui.setHintContext(exercise);
@@ -58,6 +75,7 @@ function handleCheck() {
 
     if (result.correct) {
         state.streak++;
+        state.lastCorrect = state.exercise;
         tickQueue();
         ui.showCorrect(result, state.exercise);
     } else {
@@ -78,7 +96,9 @@ function handleSkip() {
 }
 
 function handleTierChange(tier) {
-    state.tier = tier;
+    state.tier        = tier;
+    state.lastCorrect = null;
+    state.lastMutation = null;
     nextExercise();
 }
 
