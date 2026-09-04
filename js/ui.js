@@ -178,10 +178,12 @@ function buildHint(exercise) {
         const en     = noun.en_base ?? noun.en[0];
         const gender = noun.gender === 'f' ? 'feminine' : 'masculine';
         rows.push(
-            `<strong>${escHtml(en)}</strong> = ${escHtml(noun.it)}` +
-            ` <span id="hint-gender" class="d-none text-muted">(${gender})</span>` +
-            ` <a href="#" id="hint-gender-btn" class="ms-2 small text-muted" style="text-decoration:none"` +
-            ` onclick="document.getElementById('hint-gender').classList.remove('d-none');this.remove();return false;">gender?</a>`
+            `<strong>${escHtml(en)}</strong> = ${escHtml(noun.it)}<br>` +
+            `<span class="ms-3">` +
+            `<span id="hint-gender" class="d-none text-muted small">(${gender})</span>` +
+            `<a href="#" id="hint-gender-btn" class="small text-muted" style="text-decoration:none"` +
+            ` onclick="document.getElementById('hint-gender').classList.remove('d-none');this.remove();return false;">gender?</a>` +
+            `</span>`
         );
     }
     if (adjective) {
