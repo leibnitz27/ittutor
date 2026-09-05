@@ -256,7 +256,7 @@ function buildAdjectiveParadigm(adj) {
     }
 
     return `
-        <details class="small mt-0 mb-3">
+        <details class="small mt-2 mb-3">
             <summary class="text-muted" style="cursor:pointer">All forms of <em>${name}</em></summary>
             <table class="mt-2 ms-2">
                 <thead><tr>
