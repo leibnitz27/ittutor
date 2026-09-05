@@ -322,6 +322,10 @@ function buildAdjectiveParadigm(adj) {
             `<td>${escHtml(f.fp)}</td></tr>`;
     }
 
+    const noteHtml = adj.note
+        ? `<p class="text-muted mt-2 mb-0" style="font-style:italic">${escHtml(adj.note)}</p>`
+        : '';
+
     return `
         <details class="small mt-2 mb-3">
             <summary class="text-muted" style="cursor:pointer">All forms of <em>${name}</em></summary>
@@ -333,6 +337,7 @@ function buildAdjectiveParadigm(adj) {
                 </tr></thead>
                 <tbody>${rows}</tbody>
             </table>
+            ${noteHtml}
         </details>`;
 }
 

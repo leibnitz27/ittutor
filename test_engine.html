@@ -26,9 +26,9 @@
 <div id="output"></div>
 
 <script type="module">
-import { getData }          from './js/data.js';
-import { generateExercise } from './js/engine.js';
-import { check }            from './js/checker.js';
+import { getData }                                         from './js/data.js';
+import { generateExercise, mutateDimension, generateNext } from './js/engine.js';
+import { check }                                          from './js/checker.js';
 
 const out = document.getElementById('output');
 
@@ -354,6 +354,124 @@ const a    = data.adjIndex;
 
     testCase(s, 'Wrong adjective: user types "La volpe è rosso"', { ...ex },
         [['wrong adjective rejected', !wrong.correct]]);
+}
+
+// ── Nuclear family nouns ──────────────────────────────────────────────────────
+
+{
+    const s = suite('Nuclear family nouns');
+
+    let ex = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['padre'], adjective: a['malato'], owner: 'io' });
+    testCase(s, 'Singular padre (io): Mio padre è malato — no article', ex, [
+        ['answer == "Mio padre è malato"',  ex.answer === 'Mio padre è malato'],
+        ['4 tokens (article absent)',        ex.answerTokens.length === 4],
+        ['first token role is possessive',  ex.answerTokens[0].role === 'possessive'],
+        ['ruleId is possessive_nuclear',    ex.answerTokens[0].ruleId === 'possessive_nuclear'],
+        ['possessive is Mio',               ex.answerTokens[0].token === 'Mio'],
+    ]);
+
+    ex = generateExercise(data, { template: 'possNounPred', number: 'plural', noun: n['padre'], adjective: a['malato'], owner: 'io' });
+    testCase(s, 'Plural padri (io): I miei padri sono malati — article restored', ex, [
+        ['answer == "I miei padri sono malati"', ex.answer === 'I miei padri sono malati'],
+        ['5 tokens (article present)',           ex.answerTokens.length === 5],
+        ['first token role is article',          ex.answerTokens[0].role === 'article'],
+    ]);
+
+    ex = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['madre'], adjective: a['stanco'], owner: 'io' });
+    testCase(s, 'Singular madre (io): Mia madre è stanca', ex, [
+        ['answer == "Mia madre è stanca"', ex.answer === 'Mia madre è stanca'],
+        ['possessive is Mia',              ex.answerTokens[0].token === 'Mia'],
+    ]);
+
+    ex = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['padre'], adjective: a['malato'], owner: 'tu' });
+    testCase(s, 'Singular padre (tu): Tuo padre è malato — no article', ex, [
+        ['answer == "Tuo padre è malato"', ex.answer === 'Tuo padre è malato'],
+        ['4 tokens (no article)',          ex.answerTokens.length === 4],
+        ['possessive is Tuo',             ex.answerTokens[0].token === 'Tuo'],
+    ]);
+}
+
+// ── Owner: tu ─────────────────────────────────────────────────────────────────
+
+{
+    const s = suite("Owner: 'tu' possessive");
+
+    let ex = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['cane'], adjective: a['malato'], owner: 'tu' });
+    testCase(s, 'tu + m singular: Il tuo cane è malato', ex, [
+        ['answer == "Il tuo cane è malato"', ex.answer === 'Il tuo cane è malato'],
+        ['prompt starts "Your"',             ex.prompt.startsWith('Your')],
+        ['possessive is tuo',               ex.answerTokens[1].token === 'tuo'],
+    ]);
+
+    ex = generateExercise(data, { template: 'possNounPred', number: 'plural', noun: n['borsa'], adjective: a['piccolo'], owner: 'tu' });
+    testCase(s, 'tu + f plural: Le tue borse sono piccole', ex, [
+        ['answer == "Le tue borse sono piccole"', ex.answer === 'Le tue borse sono piccole'],
+        ['possessive is tue',                     ex.answerTokens[1].token === 'tue'],
+    ]);
+}
+
+// ── mutateDimension ───────────────────────────────────────────────────────────
+
+{
+    const s = suite('mutateDimension');
+    const dummy = { answer: '—', answerTokens: [], hints: [], prompt: '—' };
+
+    const base = generateExercise(data, { template: 'possNounPred', number: 'singular', noun: n['gatto'], adjective: a['malato'], owner: 'io' });
+
+    let ex = mutateDimension(base, data, 'number');
+    testCase(s, 'number: singular → plural (Il mio gatto → I miei gatti)', ex, [
+        ['number flipped to plural',              ex.components.number === 'plural'],
+        ['answer == "I miei gatti sono malati"',  ex.answer === 'I miei gatti sono malati'],
+    ]);
+
+    ex = mutateDimension(base, data, 'gender_swap');
+    testCase(s, 'gender_swap: gatto → gatta', ex, [
+        ['noun changed to gatta',  ex.components.noun.it === 'gatta'],
+        ['answer starts with La',  ex.answer.startsWith('La')],
+        ['_mutation set',          ex._mutation === undefined],  // mutation set by generateNext, not mutateDimension
+    ]);
+
+    ex = mutateDimension(base, data, 'owner');
+    testCase(s, 'owner: io → tu', ex, [
+        ['owner changed to tu',         ex.components.possessive === 'tu'],
+        ['answer contains tuo',         ex.answer.includes('tuo')],
+    ]);
+
+    const singBase = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['uva'], adjective: a['stupendo'] });
+    const mut = mutateDimension(singBase, data, 'number');
+    testCase(s, 'singular_only noun: number mutation returns null', mut ?? dummy, [
+        ['returns null', mut === null],
+    ]);
+}
+
+// ── Singular-only nouns ───────────────────────────────────────────────────────
+
+{
+    const s = suite('Singular-only nouns');
+
+    const ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['uva'], adjective: a['stupendo'] });
+    testCase(s, "uva: exercise is singular, answer starts with L'uva", ex, [
+        ["answer starts with L'uva",  ex.answer.startsWith("L'uva")],
+        ['number is singular',        ex.components.number === 'singular'],
+    ]);
+
+    const ex2 = generateExercise(data, { template: 'nounPred', noun: n['acqua'], adjective: a['grande'] });
+    testCase(s, 'acqua: generateExercise without explicit number stays singular', ex2, [
+        ['number is singular', ex2.components.number === 'singular'],
+    ]);
+}
+
+// ── generateNext ──────────────────────────────────────────────────────────────
+
+{
+    const s = suite('generateNext');
+
+    const base = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['gatto'], adjective: a['malato'] });
+    const next = generateNext(base, data, { tier: 3 });
+    testCase(s, 'generateNext returns exercise with _mutation set', next, [
+        ['_mutation is set',         typeof next._mutation === 'string'],
+        ['answer differs from base', next.answer !== base.answer],
+    ]);
 }
 
 // ── Summary ───────────────────────────────────────────────────────────────────

@@ -95,6 +95,49 @@ const zainiExercise = {
     ]
 };
 
+// ── "Il posto tranquillo" — for spelling heuristic tests ─────────────────────
+
+const postoExercise = {
+    answer: "Il posto tranquillo",
+    answerTokens: [
+        { token: "Il",         role: "article",   ruleId: "article_definite",
+          context: { gender: "m", number: "singular", noun: "posto" } },
+        { token: "posto",      role: "noun",       ruleId: null,
+          context: { gender: "m", number: "singular", singular: "posto" } },
+        { token: "tranquillo", role: "adjective",  ruleId: "adj_gender_agreement",
+          accepted: ["tranquillo"], acceptedBases: ["tranquillo"],
+          context: { gender: "m", number: "singular", noun: "posto", baseForm: "tranquillo", agreement: "4form" } }
+    ]
+};
+
+// ── "L'uva è stupenda" / "L'amico è grande" — for elision error tests ────────
+
+const uvaExercise = {
+    answer: "L'uva è stupenda",
+    answerTokens: [
+        { token: "L'uva",    role: "article_noun", ruleId: "article_definite",
+          context: { gender: "f", number: "singular", noun: "uva", article_class: "vowel" } },
+        { token: "è",        role: "verb",          ruleId: null,
+          context: { verb: "essere", pronoun: "lui/lei" } },
+        { token: "stupenda", role: "adjective",     ruleId: "adj_gender_agreement",
+          accepted: ["stupenda"], acceptedBases: ["stupendo"],
+          context: { gender: "f", number: "singular", noun: "uva", baseForm: "stupendo", agreement: "4form" } }
+    ]
+};
+
+const amicoElisionExercise = {
+    answer: "L'amico è grande",
+    answerTokens: [
+        { token: "L'amico", role: "article_noun", ruleId: "article_definite",
+          context: { gender: "m", number: "singular", noun: "amico", article_class: "vowel" } },
+        { token: "è",       role: "verb",          ruleId: null,
+          context: { verb: "essere", pronoun: "lui/lei" } },
+        { token: "grande",  role: "adjective",     ruleId: "adj_2form",
+          accepted: ["grande"], acceptedBases: ["grande"],
+          context: { gender: "m", number: "singular", noun: "amico", baseForm: "grande", agreement: "2form" } }
+    ]
+};
+
 // ── Test cases ────────────────────────────────────────────────────────────────
 
 const tests = [
@@ -292,6 +335,68 @@ const tests = [
             },
         ]
     },
+    {
+        suite: "Spelling heuristic (adjective stem typo)",
+        cases: [
+            {
+                label: "tranquilo → tranquillo: same ending, stem typo → Spelling message",
+                input: "Il posto tranquilo",
+                exercise: postoExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: true },
+                    { correct: true },
+                    { correct: false, message: "Spelling" },
+                ]
+            },
+            {
+                label: "tranquilla → tranquillo: ending differs (a≠o) → agreement message, not spelling",
+                input: "Il posto tranquilla",
+                exercise: postoExercise,
+                expect: { correct: false },
+                expectTokens: [
+                    { correct: true },
+                    { correct: true },
+                    { correct: false, message: "must agree" },
+                ]
+            },
+            {
+                label: "Perfect answer",
+                input: "Il posto tranquillo",
+                exercise: postoExercise,
+                expect: { correct: true, accentOnly: false },
+            },
+        ]
+    },
+    {
+        suite: "Elision structural errors",
+        cases: [
+            {
+                label: "'la uva' instead of 'l\\'uva': feminine elision message",
+                input: "la uva è stupenda",
+                exercise: uvaExercise,
+                expect: { correct: false },
+                expectStructural: true,
+                expectStructuralMessage: "'la' elides",
+            },
+            {
+                label: "'il amico' instead of 'l\\'amico': masculine elision message",
+                input: "il amico è grande",
+                exercise: amicoElisionExercise,
+                expect: { correct: false },
+                expectStructural: true,
+                expectStructuralMessage: "'il' elides",
+            },
+            {
+                label: "Generic word count error (not elision) still shows count message",
+                input: "La cagna stanca",
+                exercise: cagnaExercise,
+                expect: { correct: false },
+                expectStructural: true,
+                expectStructuralMessage: "Expected 5 words",
+            },
+        ]
+    },
 ];
 
 // ── Runner ────────────────────────────────────────────────────────────────────
@@ -318,6 +423,7 @@ for (const suite of tests) {
             if ('correct'    in tc.expect) assert(result.correct    === tc.expect.correct,    `correct: expected ${tc.expect.correct}, got ${result.correct}`);
             if ('accentOnly' in tc.expect) assert(result.accentOnly === tc.expect.accentOnly, `accentOnly: expected ${tc.expect.accentOnly}, got ${result.accentOnly}`);
             if (tc.expectStructural) assert(result.structuralError !== null, 'expected structuralError');
+            if (tc.expectStructuralMessage) assert(result.structuralError?.message?.includes(tc.expectStructuralMessage), `structuralError.message: expected to include "${tc.expectStructuralMessage}", got "${result.structuralError?.message}"`);
             if (tc.expectTokens) {
                 assert(result.tokens.length === tc.expectTokens.length, `token count: expected ${tc.expectTokens.length}, got ${result.tokens.length}`);
                 tc.expectTokens.forEach((et, i) => {

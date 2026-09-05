@@ -142,7 +142,8 @@
     },
     "position": "post",
     "tier": 2,
-    "notes": "Invariable — does not change for gender or number"
+    "notes": "Invariable — does not change for gender or number",
+    "note": "'blu' is borrowed from French — loanwords keep their foreign form and don't inflect for gender or number"
   },
   {
     "it": "rosa",
@@ -158,7 +159,8 @@
     },
     "position": "post",
     "tier": 3,
-    "notes": "Invariable — does not change for gender or number"
+    "notes": "Invariable — does not change for gender or number",
+    "note": "'rosa' is a noun (the flower) repurposed as a colour — nouns used as adjectives keep their noun form and don't inflect"
   },
   {
     "it": "furbo",
