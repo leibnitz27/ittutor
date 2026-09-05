@@ -310,6 +310,32 @@ const a    = data.adjIndex;
     ]);
 }
 
+// ── Gender hints on nounPred and nounAdj ─────────────────────────────────────
+
+{
+    const s = suite('Gender hints: nounPred and nounAdj');
+
+    let ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['cagna'], adjective: a['stanco'] });
+    testCase(s, 'nounPred + cagna: prompt uses en_base, hint is (female)', ex, [
+        ['hint is (female)',               ex.hints.length === 1 && ex.hints[0].text === '(female)'],
+        ['prompt uses en_base "dog"',      ex.prompt === 'The dog is tired'],
+        ['answer is correct Italian',      ex.answer === 'La cagna è stanca'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounAdj', number: 'singular', definiteness: 'definite', noun: n['gatta'], adjective: a['piccolo'] });
+    testCase(s, 'nounAdj + gatta: prompt uses en_base, hint is (female)', ex, [
+        ['hint is (female)',               ex.hints.length === 1 && ex.hints[0].text === '(female)'],
+        ['prompt uses en_base "cat"',      ex.prompt === 'The small cat'],
+        ['answer is correct Italian',      ex.answer === 'La gatta piccola'],
+    ]);
+
+    ex = generateExercise(data, { template: 'nounPred', number: 'singular', noun: n['gatto'], adjective: a['piccolo'] });
+    testCase(s, 'nounPred + gatto (masculine base): no hint', ex, [
+        ['no hint',                        ex.hints.length === 0],
+        ['prompt unchanged',               ex.prompt === 'The cat is small'],
+    ]);
+}
+
 // ── Synonym acceptance (via checker) ─────────────────────────────────────────
 
 {

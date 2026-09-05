@@ -208,7 +208,9 @@ function buildNounAdj(noun, adj, number, definiteness, adjIndex) {
     const atTokens = articleNounTokens(article, nounIt, noun, number, definiteness);
     const tokens   = [...atTokens, adjToken(adjIt, adj, noun, number, adjIndex)];
 
-    const nounEn = number === 'singular' ? noun.en[0] : enPlural(noun.en[0]);
+    const hint   = epiceneHint(noun) ?? genderHint(noun);
+    const baseEn = noun.en_base ?? noun.en[0];
+    const nounEn = number === 'singular' ? baseEn : enPlural(baseEn);
     const artEn  = definiteness === 'definite' ? 'The' : (number === 'singular' ? 'A' : '');
     const prompt = `${artEn ? artEn + ' ' : ''}${adj.en[0]} ${nounEn}`.trim();
 
@@ -216,11 +218,15 @@ function buildNounAdj(noun, adj, number, definiteness, adjIndex) {
     const answer = tokens.map(t => t.token).join(' ');
     tokens[0].token = capitalize(tokens[0].token);  // ensure capitalised in stored token too
 
+    const promptParts = hint
+        ? [{ text: `${artEn} `, type: 'text' }, { text: hint, type: 'hint' }, { text: ` ${adj.en[0]} ${nounEn}`, type: 'text' }]
+        : [{ text: prompt, type: 'text' }];
+
     return {
         type: 'translate_to_it', template: 'nounAdj',
         prompt,
-        promptParts: buildPromptParts([{ text: prompt, type: 'text' }]),
-        hints: [],
+        promptParts,
+        hints: hint ? [{ text: hint, display: 'italic-muted' }] : [],
         answer,
         answerTokens: tokens,
         components: { noun, adjective: adj, number, definiteness }
@@ -242,8 +248,9 @@ function buildNounPred(noun, adj, number, adjIndex) {
         adjToken(adjIt, adj, noun, number, adjIndex),
     ];
 
-    const hint   = epiceneHint(noun);
-    const nounEn = number === 'singular' ? noun.en[0] : enPlural(noun.en[0]);
+    const hint   = epiceneHint(noun) ?? genderHint(noun);
+    const baseEn = noun.en_base ?? noun.en[0];
+    const nounEn = number === 'singular' ? baseEn : enPlural(baseEn);
     const verbEn = number === 'singular' ? 'is' : 'are';
     const prompt = `The ${nounEn} ${verbEn} ${adj.en[0]}`;
 

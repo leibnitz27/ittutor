@@ -80,6 +80,8 @@ function shortMessage(got, expected, role, context) {
 
         case 'adjective': {
             const baseAdj = context?.baseForm ?? '';
+            if (levenshtein(got, expected) <= 2 && got.slice(-1) === expected.slice(-1))
+                return `Spelling: '${got}' should be '${expected}'`;
             if (context?.agreement === '2form')
                 return `'${baseAdj}' has the same form for masculine and feminine -- use '${expected}'`;
             if (genderWord && number)
