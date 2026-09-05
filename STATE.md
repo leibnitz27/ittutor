@@ -5,8 +5,8 @@ A personal web-based Italian language tutor to supplement DL (Duolingo). Non-com
 Goal: minimally conversational Italian, drilling genuine recall (blank input, no word banks).
 
 ## Status
-**Phase 5 complete + significant bugfixes and UX improvements.**
-Next: fix 2-form adjective error messages and explanations (adj_2form ruleId).
+**Phase 5 complete + extensive UX improvements and error feedback.**
+Article paradigm table just added; ready to test and push.
 
 ## Tech Stack
 - Plain JavaScript ES modules — no build step, runs directly in browser
@@ -28,8 +28,8 @@ ittutor/
 │   ├── checker.js          answer checking; check(userInput, exercise)
 │   └── ui.js               all DOM access; showExercise / showCorrect / showIncorrect
 ├── data/
-│   ├── nouns.json          109 entries
-│   ├── adjectives.json     53 entries
+│   ├── nouns.json          124 entries
+│   ├── adjectives.json     54 entries
 │   ├── verbs.json          39 entries
 │   ├── phrases.json        5 entries
 │   └── rules.json          10 entries
@@ -47,8 +47,7 @@ ittutor/
 - [x] Phase 8 — Data expansion (done early: 109 nouns, 53 adj, 39 verbs)
 - [x] Phase 5 — Mutation system
 - [ ] Phase 6 — Explainer (rules.json expansion + explainer.js)
-  - Next up: adj_2form ruleId — 2-form adjectives need separate rule, error message, and explanation
-    (current adj_gender_agreement message misleadingly implies gender change when form is invariant)
+  - possessive_nuclear rule missing (nuclear family exercises have no Rules content)
 - [ ] Phase 7 — Steering UI
 
 ## UI Features (Phase 4)
@@ -84,6 +83,8 @@ ittutor/
   gender_swap, definiteness, owner, template); wrong answer or skip breaks the chain
 - No-cache headers on dev server (scripts/serve.py) — normal refresh always gets fresh files
 - Test files: test_checker.html, test_engine.html — run in browser at localhost:8000
+- Error feedback paradigm tables: adjective (expandable, handles 4/2/invariable), possessive (mio/tuo),
+  article (expandable, singular→plural with gender label, handles all article_class variants)
 
 ## Data Schema Notes
 - nouns.json fields: it, en, en_base?, gender, plural, article_class, tier,

@@ -138,10 +138,13 @@ export function showIncorrect(result, exercise) {
 
         const adjError  = errors.find(t => t.role === 'adjective');
         const possError = errors.find(t => t.role === 'possessive');
-        const adj   = adjError  ? exercise.components?.adjective  : null;
-        const owner = possError ? exercise.components?.possessive  : null;
-        if (adj)   html += buildAdjectiveParadigm(adj);
+        const artError  = errors.find(t => t.role === 'article');
+        const adj   = adjError  ? exercise.components?.adjective : null;
+        const owner = possError ? exercise.components?.possessive : null;
+        const noun  = artError  ? exercise.components?.noun      : null;
+        if (noun)  html += buildArticleParadigm(noun, artError?.ruleId === 'possessive_article');
         if (owner) html += buildPossessiveParadigm(owner);
+        if (adj)   html += buildAdjectiveParadigm(adj);
     }
 
     html += '</div>';
@@ -259,6 +262,39 @@ function buildPossessiveParadigm(owner) {
                     <th class="pe-3 fw-normal text-muted">singular</th>
                     <th class="fw-normal text-muted">plural</th>
                 </tr></thead>
+                <tbody>${rows}</tbody>
+            </table>
+        </details>`;
+}
+
+function artPair(noun, forPossessive) {
+    if (forPossessive) {
+        return noun.gender === 'f' ? { sg: 'la', pl: 'le' } : { sg: 'il', pl: 'i' };
+    }
+    const g = noun.gender, ac = noun.article_class;
+    if (g === 'm') {
+        if (ac === 'lo')    return { sg: 'lo',  pl: 'gli' };
+        if (ac === 'vowel') return { sg: "l'",  pl: 'gli' };
+        return                     { sg: 'il',  pl: 'i'   };
+    } else {
+        if (ac === 'vowel') return { sg: "l'",  pl: 'le'  };
+        return                     { sg: 'la',  pl: 'le'  };
+    }
+}
+
+function buildArticleParadigm(noun, forPossessive = false) {
+    const { sg, pl } = artPair(noun, forPossessive);
+    const genderWord  = noun.gender === 'f' ? 'feminine' : 'masculine';
+    const sgForm = sg.endsWith("'") ? sg + noun.it : sg + ' ' + noun.it;
+    const plForm = noun.plural ? pl + ' ' + noun.plural : null;
+
+    let rows = `<tr><td class="text-muted pe-3">singular</td><td>${escHtml(sgForm)}</td></tr>`;
+    if (plForm) rows += `<tr><td class="text-muted pe-3">plural</td><td>${escHtml(plForm)}</td></tr>`;
+
+    return `
+        <details class="small mt-2 mb-3">
+            <summary class="text-muted" style="cursor:pointer"><em>${escHtml(noun.it)}</em> (${genderWord})</summary>
+            <table class="mt-2 ms-2">
                 <tbody>${rows}</tbody>
             </table>
         </details>`;

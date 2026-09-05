@@ -111,6 +111,7 @@
       { "it": "il mio gatto", "en": "my cat (masculine singular)" },
       { "it": "la mia casa", "en": "my house (feminine singular)" },
       { "it": "i miei libri", "en": "my books (masculine plural)" },
+      { "it": "le mie scarpe", "en": "my shoes (feminine plural)" },
       { "it": "mio padre", "en": "my father (singular family member — no article)" },
       { "it": "il loro padre", "en": "their father (loro always keeps the article)" }
     ]

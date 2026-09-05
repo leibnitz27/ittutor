@@ -137,6 +137,26 @@ export function check(userInput, exercise) {
     const answerTokens = exercise.answerTokens;
 
     if (userTokens.length !== answerTokens.length) {
+        // Detect elision: user wrote "la uva" instead of "l'uva" (one extra word)
+        const elidedAt = userTokens.length === answerTokens.length + 1
+            ? answerTokens.findIndex(t => t.token.includes("'"))
+            : -1;
+
+        let message;
+        if (elidedAt !== -1) {
+            const elidedTok = answerTokens[elidedAt];
+            const expected  = elidedTok.token;
+            const userArt   = userTokens[elidedAt]     ?? '';
+            const userNoun  = userTokens[elidedAt + 1] ?? '';
+            const gender    = elidedTok.context?.gender;
+            const artForm   = elidedTok.ruleId === 'article_indefinite' ? 'una'
+                            : gender === 'f'                            ? 'la'
+                            :                                             'il';
+            message = `'${artForm}' elides to 'l\'' before a vowel — write '${expected}', not '${userArt} ${userNoun}'`;
+        } else {
+            message = `Expected ${answerTokens.length} word${answerTokens.length !== 1 ? 's' : ''}, got ${userTokens.length}.`;
+        }
+
         return {
             correct: false,
             accentOnly: false,
@@ -144,7 +164,7 @@ export function check(userInput, exercise) {
             structuralError: {
                 userCount:     userTokens.length,
                 expectedCount: answerTokens.length,
-                message: `Expected ${answerTokens.length} word${answerTokens.length !== 1 ? 's' : ''}, got ${userTokens.length}.`
+                message
             }
         };
     }
