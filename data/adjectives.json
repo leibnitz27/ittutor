@@ -863,5 +863,21 @@
     },
     "position": "post",
     "tier": 3
+  },
+  {
+    "it": "marcio",
+    "en": [
+      "rotten",
+      "bad"
+    ],
+    "agreement": "4form",
+    "forms": {
+      "ms": "marcio",
+      "fs": "marcia",
+      "mp": "marci",
+      "fp": "marce"
+    },
+    "position": "post",
+    "tier": 3
   }
 ]
