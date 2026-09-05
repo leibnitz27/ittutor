@@ -135,6 +135,10 @@ export function showIncorrect(result, exercise) {
             for (const t of errors) html += `<li>${escHtml(t.message)}</li>`;
             html += '</ul>';
         }
+
+        const adjError = errors.find(t => t.role === 'adjective');
+        const adj = adjError ? exercise.components?.adjective : null;
+        if (adj) html += buildAdjectiveParadigm(adj);
     }
 
     html += '</div>';
@@ -227,6 +231,42 @@ function toggleExplain() {
     }
     el('explainer-content').innerHTML = buildExplainer();
     panel.classList.remove('d-none');
+}
+
+function buildAdjectiveParadigm(adj) {
+    const f = adj.forms;
+    const name = escHtml(adj.it);
+    let rows;
+
+    if (adj.agreement === 'invariable') {
+        rows = `<tr><td class="text-muted pe-3">all</td><td colspan="2">${escHtml(f.ms)}</td></tr>`;
+    } else if (adj.agreement === '2form') {
+        rows =
+            `<tr><td class="text-muted pe-3">m / f</td>` +
+            `<td class="pe-3">${escHtml(f.ms)}</td>` +
+            `<td>${escHtml(f.mp)}</td></tr>`;
+    } else {
+        rows =
+            `<tr><td class="text-muted pe-3">masculine</td>` +
+            `<td class="pe-3">${escHtml(f.ms)}</td>` +
+            `<td>${escHtml(f.mp)}</td></tr>` +
+            `<tr><td class="text-muted pe-3">feminine</td>` +
+            `<td class="pe-3">${escHtml(f.fs)}</td>` +
+            `<td>${escHtml(f.fp)}</td></tr>`;
+    }
+
+    return `
+        <details class="small mt-0 mb-3">
+            <summary class="text-muted" style="cursor:pointer">All forms of <em>${name}</em></summary>
+            <table class="mt-2 ms-2">
+                <thead><tr>
+                    <th></th>
+                    <th class="pe-3 fw-normal text-muted">singular</th>
+                    <th class="fw-normal text-muted">plural</th>
+                </tr></thead>
+                <tbody>${rows}</tbody>
+            </table>
+        </details>`;
 }
 
 function buildExplainer() {
