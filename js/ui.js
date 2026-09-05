@@ -136,9 +136,12 @@ export function showIncorrect(result, exercise) {
             html += '</ul>';
         }
 
-        const adjError = errors.find(t => t.role === 'adjective');
-        const adj = adjError ? exercise.components?.adjective : null;
-        if (adj) html += buildAdjectiveParadigm(adj);
+        const adjError  = errors.find(t => t.role === 'adjective');
+        const possError = errors.find(t => t.role === 'possessive');
+        const adj   = adjError  ? exercise.components?.adjective  : null;
+        const owner = possError ? exercise.components?.possessive  : null;
+        if (adj)   html += buildAdjectiveParadigm(adj);
+        if (owner) html += buildPossessiveParadigm(owner);
     }
 
     html += '</div>';
@@ -231,6 +234,34 @@ function toggleExplain() {
     }
     el('explainer-content').innerHTML = buildExplainer();
     panel.classList.remove('d-none');
+}
+
+const POSSESSIVE_FORMS = {
+    io: { ms: 'mio', fs: 'mia', mp: 'miei', fp: 'mie' },
+    tu: { ms: 'tuo', fs: 'tua', mp: 'tuoi', fp: 'tue' },
+};
+
+function buildPossessiveParadigm(owner) {
+    const p = POSSESSIVE_FORMS[owner];
+    if (!p) return '';
+    const label = owner === 'io' ? 'mio (my)' : 'tuo (your)';
+    const rows =
+        `<tr><td class="text-muted pe-3">masculine</td>` +
+        `<td class="pe-3">${p.ms}</td><td>${p.mp}</td></tr>` +
+        `<tr><td class="text-muted pe-3">feminine</td>` +
+        `<td class="pe-3">${p.fs}</td><td>${p.fp}</td></tr>`;
+    return `
+        <details class="small mt-2 mb-3">
+            <summary class="text-muted" style="cursor:pointer">All forms of <em>${label}</em></summary>
+            <table class="mt-2 ms-2">
+                <thead><tr>
+                    <th></th>
+                    <th class="pe-3 fw-normal text-muted">singular</th>
+                    <th class="fw-normal text-muted">plural</th>
+                </tr></thead>
+                <tbody>${rows}</tbody>
+            </table>
+        </details>`;
 }
 
 function buildAdjectiveParadigm(adj) {
