@@ -1196,5 +1196,157 @@
     "epicene": true,
     "notes": "Traditionally masculine grammatically — 'il soprano' even for a female singer. Modern Italian increasingly uses 'la soprano' for women, but the classical form is masculine.",
     "animate": true
+  },
+  {
+    "it": "mela",
+    "en": [
+      "apple"
+    ],
+    "gender": "f",
+    "plural": "mele",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "arancia",
+    "en": [
+      "orange"
+    ],
+    "gender": "f",
+    "plural": "arance",
+    "article_class": "vowel",
+    "tier": 1
+  },
+  {
+    "it": "banana",
+    "en": [
+      "banana"
+    ],
+    "gender": "f",
+    "plural": "banane",
+    "article_class": "standard",
+    "tier": 1
+  },
+  {
+    "it": "fragola",
+    "en": [
+      "strawberry"
+    ],
+    "gender": "f",
+    "plural": "fragole",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "limone",
+    "en": [
+      "lemon"
+    ],
+    "gender": "m",
+    "plural": "limoni",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "pera",
+    "en": [
+      "pear"
+    ],
+    "gender": "f",
+    "plural": "pere",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "pesca",
+    "en": [
+      "peach"
+    ],
+    "gender": "f",
+    "plural": "pesche",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "melone",
+    "en": [
+      "melon"
+    ],
+    "gender": "m",
+    "plural": "meloni",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "uva",
+    "en": [
+      "grape"
+    ],
+    "gender": "f",
+    "plural": "uve",
+    "article_class": "vowel",
+    "tier": 2,
+    "singular_only": true
+  },
+  {
+    "it": "ciliegia",
+    "en": [
+      "cherry"
+    ],
+    "gender": "f",
+    "plural": "ciliegie",
+    "article_class": "standard",
+    "tier": 2
+  },
+  {
+    "it": "lampone",
+    "en": [
+      "raspberry"
+    ],
+    "gender": "m",
+    "plural": "lamponi",
+    "article_class": "standard",
+    "tier": 3
+  },
+  {
+    "it": "mirtillo",
+    "en": [
+      "blueberry"
+    ],
+    "gender": "m",
+    "plural": "mirtilli",
+    "article_class": "standard",
+    "tier": 3
+  },
+  {
+    "it": "mandarino",
+    "en": [
+      "mandarin"
+    ],
+    "gender": "m",
+    "plural": "mandarini",
+    "article_class": "standard",
+    "tier": 3
+  },
+  {
+    "it": "anguria",
+    "en": [
+      "watermelon"
+    ],
+    "gender": "f",
+    "plural": "angurie",
+    "article_class": "vowel",
+    "tier": 3,
+    "singular_only": true
+  },
+  {
+    "it": "ananas",
+    "en": [
+      "pineapple"
+    ],
+    "gender": "m",
+    "plural": "ananas",
+    "article_class": "vowel",
+    "tier": 3
   }
 ]
